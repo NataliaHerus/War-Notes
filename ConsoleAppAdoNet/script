@@ -1,0 +1,43 @@
+-- CREATE DATABASE WarNotes;
+
+CREATE TABLE IF NOT EXISTS "users"
+(
+	Id SERIAL PRIMARY KEY,
+	FirstName VARCHAR(50) NOT NULL,
+	LastName VARCHAR(50) NOT NULL,
+	Email VARCHAR NOT NULL,
+	Password VARCHAR NOT NULL,
+	Role INT NOT NULL,
+	IsBlocked BOOL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "categories"
+(
+	Id SERIAL PRIMARY KEY,
+	CategoryName VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "articles"
+(
+	Id SERIAL PRIMARY KEY,
+	CreatedAt timestamp default NULL,
+	EditedAt timestamp default NULL,
+	Text text default NULL,
+	CategoryId INT NOT NULL,
+	CONSTRAINT fk_articles_category FOREIGN KEY (CategoryId) REFERENCES
+	"categories"(Id)
+);
+
+CREATE TABLE IF NOT EXISTS "saved_articles"
+(
+	Id SERIAL PRIMARY KEY,
+	UserId INT NOT NULL,
+	ArticleId INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "liked_articles"
+(
+	Id SERIAL PRIMARY KEY,
+	UserId INT NOT NULL,
+	ArticleId INT NOT NULL
+);
