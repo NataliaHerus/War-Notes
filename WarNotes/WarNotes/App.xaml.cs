@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DataAccessLayer.EntityFramework;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 
@@ -13,6 +16,15 @@ namespace WarNotes
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    IConfiguration configuration = new ConfigurationBuilder()
+                        .AddUserSecrets<App>(true)
+                        .Build();
+
+                    var sqlConnectionString = configuration.GetConnectionString("WarNotesDB");
+
+                    services.AddDbContext<WarNotesContext>(options =>
+                        options.UseNpgsql(sqlConnectionString));
+
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();
