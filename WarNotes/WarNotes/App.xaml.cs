@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
+using WarNotes.View;
 
 namespace WarNotes
 {
@@ -25,7 +26,7 @@ namespace WarNotes
                     services.AddDbContext<WarNotesContext>(options =>
                         options.UseNpgsql(sqlConnectionString));
 
-                    services.AddSingleton<MainWindow>();
+                    services.AddSingleton<LoginView>();
                 })
                 .Build();
         }
@@ -34,7 +35,7 @@ namespace WarNotes
         {
             await AppHost!.StartAsync();
 
-            var startupForm = AppHost.Services.GetRequiredService<MainWindow>();
+            var startupForm = AppHost.Services.GetRequiredService<LoginView>();
             startupForm.Show();
 
             base.OnStartup(e);

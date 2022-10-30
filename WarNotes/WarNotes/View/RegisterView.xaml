@@ -14,8 +14,7 @@
         MouseDown="Window_MouseDown">
     <Border CornerRadius="12">
         <Border.Background>
-            <ImageBrush ImageSource="/Images/image_2022-10-26_18-00-06.png"
-                        Stretch="None"/>
+            <ImageBrush ImageSource="/Images/image_2022-10-26_18-00-06.png"/>
         </Border.Background>
         <Border CornerRadius="10"                    
             BorderThickness="2"
@@ -122,7 +121,7 @@
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"/>
                     <TextBlock Text="Ім'я"
-                               Foreground="DarkGray"
+                               Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
@@ -133,7 +132,7 @@
                              FontFamily="Montserrat"                            
                              Foreground="White"
                              CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
+                             BorderBrush="White"
                              BorderThickness="0,0,0,2"
                              Height="28"
                              VerticalContentAlignment="Center"
@@ -146,7 +145,7 @@
                         </TextBox.Background>
                     </TextBox>
                     <TextBlock Text="Прізвище"
-                               Foreground="DarkGray"
+                               Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
@@ -157,7 +156,7 @@
                              FontFamily="Montserrat"                            
                              Foreground="White"
                              CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
+                             BorderBrush="White"
                              BorderThickness="0,0,0,2"
                              Height="28"
                              VerticalContentAlignment="Center"
@@ -170,7 +169,7 @@
                         </TextBox.Background>
                     </TextBox>
                     <TextBlock Text="E-mail"
-                               Foreground="DarkGray"
+                               Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
@@ -181,7 +180,7 @@
                              FontFamily="Montserrat"                            
                              Foreground="White"
                              CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
+                             BorderBrush="White"
                              BorderThickness="0,0,0,2"
                              Height="28"
                              VerticalContentAlignment="Center"
@@ -194,7 +193,7 @@
                         </TextBox.Background>
                     </TextBox>
                     <TextBlock Text="Пароль"
-                               Foreground="DarkGray"
+                               Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
@@ -205,7 +204,7 @@
                              FontFamily="Montserrat"                            
                              Foreground="White"
                              CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
+                             BorderBrush="White"
                              BorderThickness="0,0,0,2"
                              Height="28"
                              VerticalContentAlignment="Center"
@@ -218,7 +217,7 @@
                         </PasswordBox.Background>
                     </PasswordBox>
                     <TextBlock Text="Повторіть пароль"
-                               Foreground="DarkGray"
+                               Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
@@ -229,7 +228,7 @@
                              FontFamily="Montserrat"                            
                              Foreground="White"
                              CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
+                             BorderBrush="White"
                              BorderThickness="0,0,0,2"
                              Height="28"
                              VerticalContentAlignment="Center"
