@@ -96,5 +96,12 @@ namespace WarNotes.View
                 MessageBox.Show("Працює!!!");
             }
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView loginView = new LoginView();
+            loginView.Show();
+            Hide();
+        }
     }
 }

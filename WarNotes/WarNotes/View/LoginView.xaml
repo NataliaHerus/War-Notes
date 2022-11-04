@@ -14,7 +14,7 @@
         MouseDown="Window_MouseDown">
     <Border CornerRadius="12">
         <Border.Background>
-            <ImageBrush ImageSource="/Images/image_2022-10-26_18-00-06.png"/>
+            <ImageBrush ImageSource="/Images/background.png"/>
         </Border.Background>
         <Border CornerRadius="10"                    
             BorderThickness="2"
@@ -147,7 +147,7 @@
                              Margin="0,5,0,0"
                              Padding="23,0,0,0">
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Images/pngwinguser.png"                                 
+                            <ImageBrush ImageSource="/Images/user.png"                                 
                                         Stretch="Uniform"
                                         AlignmentX="Left"/>
                         </TextBox.Background>
@@ -206,36 +206,46 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="btnRegister"                          
+                    
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,90,0,0">
+                        <TextBlock Text="Немає акаунту?"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"/>
+                        <Button x:Name="btnRegister"                          
                             BorderThickness="0"
                             Content="Зареєструватися"
-                            Foreground="Black"
+                            Foreground="White"
                             FontSize="12"
+                            FontWeight="Medium"
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
-                            Margin="0,15,0,0"
+                            Margin="8,0,0,0"
                             Click="btnRegister_Click">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Red"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Pink"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="150" Height="40"
-                                        CornerRadius="20"
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="100" Height="14"                                  
                                         Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
+                                        <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Border>
