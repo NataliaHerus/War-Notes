@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.Services.Interfaces;
+using BusinessLogicLayer.Services.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,11 @@ namespace WarNotes.View
     /// </summary>
     public partial class RegisterView : Window
     {
-        public RegisterView()
+        protected readonly IUserService _userService;
+        public RegisterView(IUserService userService)
         {
             InitializeComponent();
+            _userService = userService;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -41,27 +46,27 @@ namespace WarNotes.View
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string name = txtName.Text.Trim();
-            string last_name = txtLast.Text.Trim();
+            string firstName = txtName.Text.Trim();
+            string lastName = txtLast.Text.Trim();
             string email = txtMail.Text.Trim();
-            string pass = txtPass.Password.Trim().ToLower();
-            string pass2 = txtPass2.Password.Trim().ToLower();
-            if (name.Length < 2)
+            string password = txtPass.Password.Trim().ToLower();
+            string confirmPassword = txtPass2.Password.Trim().ToLower();
+            if (firstName.Length < 2)
             {
                 txtName.ToolTip = "Ім'я мусить містити не менше 2 символів!";
                 txtName.Background = Brushes.DarkRed;
             }
-            else if (last_name.Length < 2)
+            else if (lastName.Length < 2)
             {
                 txtLast.ToolTip = "Прізвище мусить містити не менше 2 символів!";
                 txtLast.Background = Brushes.DarkRed;
             }
-            else if (pass.Length < 6)
+            else if (password.Length < 6)
             {
                 txtPass.ToolTip = "Пароль мусить містити не менше 2 символів!";
                 txtPass.Background = Brushes.DarkRed;
             }
-            else if (pass != pass2)
+            else if (password != confirmPassword)
             {
                 txtPass.ToolTip = "Паролі не співпадають!";
                 txtPass.Background = Brushes.DarkRed;
@@ -93,13 +98,23 @@ namespace WarNotes.View
                 txtPass2.Background = Brushes.Transparent;
                 txtMail.ToolTip = "";
                 txtMail.Background = Brushes.Transparent;
-                MessageBox.Show("Працює!!!");
+                MessageBox.Show("Користувача успішно зареєстровано");
             }
+
+            Hasher hash = new Hasher(password);
+            string hashedPassword = hash.ComputeHash();
+            UserDTO user = new UserDTO();
+
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Email = email;
+            user.Password = hashedPassword;
+            _userService.CreateUserAsync(user);
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView();
+            LoginView loginView = new LoginView(_userService);
             loginView.Show();
             Hide();
         }
