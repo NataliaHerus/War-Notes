@@ -8,20 +8,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.EntityFramework;
 
 namespace BusinessLogicLayer.Services
 {
     public class UserService : IUserService
     {
+        protected readonly WarNotesContext _dbContext;
         protected readonly IRepository<User> _userRepository;
         protected readonly IMapper _mapper;
 
-        public UserService(IRepository<User> userRepository, IMapper mapper)
+        public UserService(IRepository<User> userRepository, IMapper mapper, WarNotesContext dbContext)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _dbContext = dbContext;
         }
-
         public async Task<UserDTO> CreateUserAsync(UserDTO dto)
         {
             var user = _mapper.Map<User>(dto);
@@ -33,9 +35,11 @@ namespace BusinessLogicLayer.Services
             return _mapper.Map<UserDTO>(newUser);
         }
 
-        public Task<UserDTO> GetUserAsync(int id)
+        public UserDTO GetUserByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
+
+            return _mapper.Map<UserDTO>(user); 
         }
     }
 }

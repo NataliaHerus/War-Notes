@@ -26,11 +26,10 @@ namespace DataAccessLayer.Repositories
             return entity;
         }
 
-        public async Task<TEntity> GetByKeyAsync(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
-
         public async Task<TEntity> DeleteAsync(TEntity entity)
         {
             await Task.Run(() => _dbSet.Remove(entity));

@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories.Interfaces
     {
         Task<TEntity> AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetByKeyAsync(int key);
+        Task<TEntity> GetByIdAsync(int id);
         Task<TEntity> DeleteAsync(TEntity entity);
         Task<int> SaveChangesAcync();
     }

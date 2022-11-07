@@ -10,6 +10,6 @@ namespace BusinessLogicLayer.Services.Interfaces
     public interface IUserService
     {
         Task<UserDTO> CreateUserAsync(UserDTO query);
-        Task<UserDTO> GetUserAsync(int id);
+        UserDTO GetUserByEmailAsync(string email);
     }
 }

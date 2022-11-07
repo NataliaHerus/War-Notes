@@ -44,7 +44,7 @@ namespace WarNotes.View
             Application.Current.Shutdown();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string firstName = txtName.Text.Trim();
             string lastName = txtLast.Text.Trim();
@@ -86,30 +86,34 @@ namespace WarNotes.View
                 txtMail.ToolTip = "E-mail мусить містити крапку";
                 txtMail.Background = Brushes.DarkRed;
             }
+            if (_userService.GetUserByEmailAsync(email) is not null)
+            {
+                MessageBox.Show("Користувач з такою адресою вже існує. Будь ласка, замініть на іншу");
+            }
             else
             {
-                txtName.ToolTip = "";
-                txtName.Background = Brushes.Transparent;
-                txtLast.ToolTip = "";
-                txtLast.Background = Brushes.Transparent;
-                txtPass.ToolTip = "";
-                txtPass.Background = Brushes.Transparent;
-                txtPass2.ToolTip = "";
-                txtPass2.Background = Brushes.Transparent;
-                txtMail.ToolTip = "";
-                txtMail.Background = Brushes.Transparent;
+                Hasher hash = new Hasher(password);
+                string hashedPassword = hash.ComputeHash();
+                UserDTO user = new UserDTO();
+
+                user.FirstName = firstName;
+                user.LastName = lastName;
+                user.Email = email;
+                user.Password = hashedPassword;
+                await _userService.CreateUserAsync(user);
                 MessageBox.Show("Користувача успішно зареєстровано");
             }
 
-            Hasher hash = new Hasher(password);
-            string hashedPassword = hash.ComputeHash();
-            UserDTO user = new UserDTO();
-
-            user.FirstName = firstName;
-            user.LastName = lastName;
-            user.Email = email;
-            user.Password = hashedPassword;
-            _userService.CreateUserAsync(user);
+            txtName.ToolTip = "";
+            txtName.Background = Brushes.Transparent;
+            txtLast.ToolTip = "";
+            txtLast.Background = Brushes.Transparent;
+            txtPass.ToolTip = "";
+            txtPass.Background = Brushes.Transparent;
+            txtPass2.ToolTip = "";
+            txtPass2.Background = Brushes.Transparent;
+            txtMail.ToolTip = "";
+            txtMail.Background = Brushes.Transparent;
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
