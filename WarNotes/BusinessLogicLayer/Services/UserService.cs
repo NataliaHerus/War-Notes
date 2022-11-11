@@ -37,7 +37,7 @@ namespace BusinessLogicLayer.Services
 
         public UserRegistrationDTO GetUserByEmailAsync(string email)
         {
-            var user = _dbContext.Users?.FirstOrDefault(x => x.Email == email);
+            var user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
 
             return _mapper.Map<UserRegistrationDTO>(user); 
         }

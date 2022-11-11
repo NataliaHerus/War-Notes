@@ -9,9 +9,7 @@ namespace BusinessLogicLayer
 {
     public class Hasher
     {
-        private readonly byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
         private readonly string password;
-
         public Hasher(string password)
         {
             this.password = password;
@@ -19,9 +17,19 @@ namespace BusinessLogicLayer
 
         public string ComputeHash()
         {
-            byte[] bytesToHash = Encoding.UTF8.GetBytes(password);
-            var byteResult = new Rfc2898DeriveBytes(bytesToHash, salt, 10000);
-            return Convert.ToBase64String(byteResult.GetBytes(24));
+            string hashed = " ";
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                hashed = builder.ToString();
+            }
+            return hashed;
         }
     }
 }

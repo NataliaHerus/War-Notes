@@ -1,6 +1,5 @@
 ﻿using BusinessLogicLayer.Services.DTO;
 using BusinessLogicLayer.Services.Interfaces;
-using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
