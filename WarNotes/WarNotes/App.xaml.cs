@@ -35,6 +35,7 @@ namespace WarNotes
                     services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
                     services.AddSingleton<LoginView>();
+                    
                     var mapperConfig = new MapperConfiguration(mc =>
                     {
                         mc.AddProfile(new AutoMapperProfile());
@@ -42,6 +43,8 @@ namespace WarNotes
 
                     IMapper mapper = mapperConfig.CreateMapper();
                     services.AddSingleton(mapper);
+                    services.AddSingleton<MainView>();
+                    
                 })
                 .Build();
         }

@@ -10,15 +10,19 @@
 
   <ItemGroup>
     <None Remove="Images\background.png" />
+    <None Remove="Images\background2.jpeg" />
     <None Remove="Images\dog.png" />
     <None Remove="Images\image_2022-10-26_18-00-06.png" />
     <None Remove="Images\key.png" />
+    <None Remove="Images\menu.png" />
     <None Remove="Images\pngwinguser.png" />
     <None Remove="Images\user.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
+
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
@@ -30,8 +34,10 @@
 
   <ItemGroup>
     <Resource Include="Images\background.png" />
+    <Resource Include="Images\background2.jpeg" />
     <Resource Include="Images\dog.png" />
     <Resource Include="Images\key.png" />
+    <Resource Include="Images\menu.png" />
     <Resource Include="Images\user.png" />
   </ItemGroup>
 

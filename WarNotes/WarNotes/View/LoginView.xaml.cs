@@ -46,7 +46,9 @@ namespace WarNotes.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            MainView registerView = new MainView();
+            registerView.Show();
+            Hide();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
