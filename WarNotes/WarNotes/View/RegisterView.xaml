@@ -242,7 +242,7 @@
                     </PasswordBox>
                     <Button x:Name="btnSave"                          
                             BorderThickness="0"
-                            Content="Зберегти"
+                            Content="Зареєструвати"
                             Foreground="Black"
                             FontSize="12"
                             FontFamily="Montserrat"

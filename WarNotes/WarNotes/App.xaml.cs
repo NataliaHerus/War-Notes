@@ -1,4 +1,10 @@
-﻿using DataAccessLayer.EntityFramework;
+﻿using AutoMapper;
+using BusinessLogicLayer;
+using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Services.Interfaces;
+using DataAccessLayer.EntityFramework;
+using DataAccessLayer.Repositories;
+using DataAccessLayer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +31,18 @@ namespace WarNotes
 
                     services.AddDbContext<WarNotesContext>(options =>
                         options.UseNpgsql(sqlConnectionString));
+                    services.AddScoped<IUserService, UserService>();
+                    services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
                     services.AddSingleton<LoginView>();
+                    
+                    var mapperConfig = new MapperConfiguration(mc =>
+                    {
+                        mc.AddProfile(new AutoMapperProfile());
+                    });
+
+                    IMapper mapper = mapperConfig.CreateMapper();
+                    services.AddSingleton(mapper);
                     services.AddSingleton<MainView>();
                     
                 })

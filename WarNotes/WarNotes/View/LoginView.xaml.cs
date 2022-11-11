@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLogicLayer.Services.Interfaces;
+using DataAccessLayer.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,11 @@ namespace WarNotes.View
     /// </summary>
     public partial class LoginView : Window
     {
-        public LoginView()
+        protected readonly IUserService _userService;
+        public LoginView(IUserService userService)
         {
             InitializeComponent();
+            _userService = userService;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -49,7 +53,7 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterView registerView = new RegisterView();
+            RegisterView registerView = new RegisterView(this._userService);
             registerView.Show();
             Hide();
         }

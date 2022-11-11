@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.Services.Interfaces;
+using BusinessLogicLayer.Services.DTO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using BusinessLogicLayer.Validators;
 
 namespace WarNotes.View
 {
@@ -19,9 +13,11 @@ namespace WarNotes.View
     /// </summary>
     public partial class RegisterView : Window
     {
-        public RegisterView()
+        protected readonly IUserService _userService;
+        public RegisterView(IUserService userService)
         {
             InitializeComponent();
+            _userService = userService;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -38,68 +34,91 @@ namespace WarNotes.View
         {
             Application.Current.Shutdown();
         }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string name = txtName.Text.Trim();
-            string last_name = txtLast.Text.Trim();
+            string firstName = txtName.Text.Trim();
+            string lastName = txtLast.Text.Trim();
             string email = txtMail.Text.Trim();
-            string pass = txtPass.Password.Trim().ToLower();
-            string pass2 = txtPass2.Password.Trim().ToLower();
-            if (name.Length < 2)
+            string password = txtPass.Password.Trim();
+            string confirmPassword = txtPass2.Password.Trim();
+            bool valid = true;
+            if (!UserRegistrationValidator.IsValidName(firstName))
             {
-                txtName.ToolTip = "Ім'я мусить містити не менше 2 символів!";
+                txtName.ToolTip = "Некоректно введено ім'я";
                 txtName.Background = Brushes.DarkRed;
-            }
-            else if (last_name.Length < 2)
-            {
-                txtLast.ToolTip = "Прізвище мусить містити не менше 2 символів!";
-                txtLast.Background = Brushes.DarkRed;
-            }
-            else if (pass.Length < 6)
-            {
-                txtPass.ToolTip = "Пароль мусить містити не менше 2 символів!";
-                txtPass.Background = Brushes.DarkRed;
-            }
-            else if (pass != pass2)
-            {
-                txtPass.ToolTip = "Паролі не співпадають!";
-                txtPass.Background = Brushes.DarkRed;
-            }
-            else if (email.Length < 10)
-            {
-                txtMail.ToolTip = "E-mail мусить містити не менше 2 символів!";
-                txtMail.Background = Brushes.DarkRed;
-            }
-            else if (!email.Contains("@"))
-            {
-                txtMail.ToolTip = "E-mail мусить містити знак '@'";
-                txtMail.Background = Brushes.DarkRed;
-            }
-            else if (!email.Contains("."))
-            {
-                txtMail.ToolTip = "E-mail мусить містити крапку";
-                txtMail.Background = Brushes.DarkRed;
+                valid = false;
             }
             else
             {
-                txtName.ToolTip = "";
                 txtName.Background = Brushes.Transparent;
-                txtLast.ToolTip = "";
+            }
+            if (!UserRegistrationValidator.IsValidName(lastName))
+            {
+                txtLast.ToolTip = "Некоректно введено прізвище";
+                txtLast.Background = Brushes.DarkRed;
+                valid = false;
+            }
+            else
+            {
                 txtLast.Background = Brushes.Transparent;
-                txtPass.ToolTip = "";
+            }
+            if (!UserRegistrationValidator.IsValidPassword(password))
+            {
+                txtPass.ToolTip = "Недостатньо безпечний пароль";
+                txtPass.Background = Brushes.DarkRed;
+                valid = false;
+            }
+            else
+            {
                 txtPass.Background = Brushes.Transparent;
-                txtPass2.ToolTip = "";
+            }
+            if (password != confirmPassword)
+            {
+                txtPass2.ToolTip = "Паролі не співпадають!";
+                txtPass2.Background = Brushes.DarkRed;
+                valid = false;
+            }
+            else
+            {
                 txtPass2.Background = Brushes.Transparent;
-                txtMail.ToolTip = "";
+            }
+            if (!UserRegistrationValidator.IsValidEmail(email))
+            {
+                txtMail.ToolTip = "Некоректно введено email";
+                txtMail.Background = Brushes.DarkRed;
+                valid = false;
+            }
+            else
+            {
                 txtMail.Background = Brushes.Transparent;
-                MessageBox.Show("Працює!!!");
+            }
+            if (_userService.GetUserByEmailAsync(email) is not null)
+            {
+                MessageBox.Show("Користувач з такою адресою вже існує. Будь ласка, замініть на іншу");
+            }
+            else if (valid)
+            {
+                Hasher hash = new Hasher(password);
+                string hashedPassword = hash.ComputeHash();
+                UserRegistrationDTO user = new UserRegistrationDTO();
+
+                user.FirstName = firstName;
+                user.LastName = lastName;
+                user.Email = email;
+                user.Password = hashedPassword;
+                await _userService.CreateUserAsync(user);
+                MessageBox.Show("Користувача успішно зареєстровано");
+                txtName.ToolTip = "";
+            }
+            else
+            {
+                MessageBox.Show("Неможливо зареєструвати користувача, повторіть спробу, зважаючи на підказки");
             }
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView();
+            LoginView loginView = new LoginView(_userService);
             loginView.Show();
             Hide();
         }
