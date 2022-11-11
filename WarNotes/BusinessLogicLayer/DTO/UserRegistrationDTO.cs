@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Enums;
+using BusinessLogicLayer.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services.DTO
 {
-    public class UserDTO
+    public class UserRegistrationDTO
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

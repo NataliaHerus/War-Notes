@@ -24,22 +24,22 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
             _dbContext = dbContext;
         }
-        public async Task<UserDTO> CreateUserAsync(UserDTO dto)
-        {
+        public async Task<UserRegistrationDTO> CreateUserAsync(UserRegistrationDTO dto)
+        { 
             var user = _mapper.Map<User>(dto);
             user.IsBlocked = false;
             user.Role = 1;
             var newUser = await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAcync();
 
-            return _mapper.Map<UserDTO>(newUser);
+            return _mapper.Map<UserRegistrationDTO>(newUser);
         }
 
-        public UserDTO GetUserByEmailAsync(string email)
+        public UserRegistrationDTO GetUserByEmailAsync(string email)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
+            var user = _dbContext.Users?.FirstOrDefault(x => x.Email == email);
 
-            return _mapper.Map<UserDTO>(user); 
+            return _mapper.Map<UserRegistrationDTO>(user); 
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BusinessLogicLayer
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<User, UserRegistrationDTO>().ReverseMap();
         }
     }
 }

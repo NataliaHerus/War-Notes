@@ -1,19 +1,10 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.Services.Interfaces;
 using BusinessLogicLayer.Services.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using BusinessLogicLayer.Validators;
 
 namespace WarNotes.View
 {
@@ -43,58 +34,73 @@ namespace WarNotes.View
         {
             Application.Current.Shutdown();
         }
-
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string firstName = txtName.Text.Trim();
             string lastName = txtLast.Text.Trim();
             string email = txtMail.Text.Trim();
-            string password = txtPass.Password.Trim().ToLower();
-            string confirmPassword = txtPass2.Password.Trim().ToLower();
-            if (firstName.Length < 2)
+            string password = txtPass.Password.Trim();
+            string confirmPassword = txtPass2.Password.Trim();
+            bool valid = true;
+            if (!UserRegistrationValidator.IsValidName(firstName))
             {
-                txtName.ToolTip = "Ім'я мусить містити не менше 2 символів!";
+                txtName.ToolTip = "Некоректно введено ім'я";
                 txtName.Background = Brushes.DarkRed;
+                valid = false;
             }
-            else if (lastName.Length < 2)
+            else
             {
-                txtLast.ToolTip = "Прізвище мусить містити не менше 2 символів!";
+                txtName.Background = Brushes.Transparent;
+            }
+            if (!UserRegistrationValidator.IsValidName(lastName))
+            {
+                txtLast.ToolTip = "Некоректно введено прізвище";
                 txtLast.Background = Brushes.DarkRed;
+                valid = false;
             }
-            else if (password.Length < 6)
+            else
             {
-                txtPass.ToolTip = "Пароль мусить містити не менше 2 символів!";
+                txtLast.Background = Brushes.Transparent;
+            }
+            if (!UserRegistrationValidator.IsValidPassword(password))
+            {
+                txtPass.ToolTip = "Недостатньо безпечний пароль";
                 txtPass.Background = Brushes.DarkRed;
+                valid = false;
             }
-            else if (password != confirmPassword)
+            else
             {
-                txtPass.ToolTip = "Паролі не співпадають!";
-                txtPass.Background = Brushes.DarkRed;
+                txtPass.Background = Brushes.Transparent;
             }
-            else if (email.Length < 10)
+            if (password != confirmPassword)
             {
-                txtMail.ToolTip = "E-mail мусить містити не менше 2 символів!";
+                txtPass2.ToolTip = "Паролі не співпадають!";
+                txtPass2.Background = Brushes.DarkRed;
+                valid = false;
+            }
+            else
+            {
+                txtPass2.Background = Brushes.Transparent;
+            }
+            if (!UserRegistrationValidator.IsValidEmail(email))
+            {
+                txtMail.ToolTip = "Некоректно введено email";
                 txtMail.Background = Brushes.DarkRed;
+                valid = false;
             }
-            else if (!email.Contains("@"))
+            else
             {
-                txtMail.ToolTip = "E-mail мусить містити знак '@'";
-                txtMail.Background = Brushes.DarkRed;
-            }
-            else if (!email.Contains("."))
-            {
-                txtMail.ToolTip = "E-mail мусить містити крапку";
-                txtMail.Background = Brushes.DarkRed;
+                txtMail.Background = Brushes.Transparent;
             }
             if (_userService.GetUserByEmailAsync(email) is not null)
             {
                 MessageBox.Show("Користувач з такою адресою вже існує. Будь ласка, замініть на іншу");
             }
-            else
+            else if (valid)
             {
                 Hasher hash = new Hasher(password);
                 string hashedPassword = hash.ComputeHash();
-                UserDTO user = new UserDTO();
+                UserRegistrationDTO user = new UserRegistrationDTO();
 
                 user.FirstName = firstName;
                 user.LastName = lastName;
@@ -102,18 +108,12 @@ namespace WarNotes.View
                 user.Password = hashedPassword;
                 await _userService.CreateUserAsync(user);
                 MessageBox.Show("Користувача успішно зареєстровано");
+                txtName.ToolTip = "";
             }
-
-            txtName.ToolTip = "";
-            txtName.Background = Brushes.Transparent;
-            txtLast.ToolTip = "";
-            txtLast.Background = Brushes.Transparent;
-            txtPass.ToolTip = "";
-            txtPass.Background = Brushes.Transparent;
-            txtPass2.ToolTip = "";
-            txtPass2.Background = Brushes.Transparent;
-            txtMail.ToolTip = "";
-            txtMail.Background = Brushes.Transparent;
+            else
+            {
+                MessageBox.Show("Неможливо зареєструвати користувача, повторіть спробу, зважаючи на підказки");
+            }
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
