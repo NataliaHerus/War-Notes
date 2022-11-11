@@ -27,6 +27,8 @@ namespace WarNotes
                         options.UseNpgsql(sqlConnectionString));
 
                     services.AddSingleton<LoginView>();
+                    services.AddSingleton<MainView>();
+                    
                 })
                 .Build();
         }
