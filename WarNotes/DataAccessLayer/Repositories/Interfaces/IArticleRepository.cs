@@ -6,5 +6,6 @@ namespace DataAccessLayer.Repositories.Interfaces
     public interface IArticleRepository : IRepository<Article>
     {
         IEnumerable<string> GetArticleHeadersByCategoryName(string categoryName);
+        Article GetArticleByTitle(string title, int categoryId);
     }
 }

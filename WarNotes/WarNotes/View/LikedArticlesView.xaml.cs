@@ -8,11 +8,13 @@ namespace WarNotes.View
     public partial class LikedArticlesView : Window
     {
         private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
 
-        public LikedArticlesView(ICategoryService categoryService)
+        public LikedArticlesView(ICategoryService categoryService, IArticleService articleService)
         {
             InitializeComponent();
             _categoryService = categoryService;
+            _articleService = articleService;
 
             List<ArticleDTO> items = new List<ArticleDTO>();
             items.Add(new ArticleDTO() { Title = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa?" });
@@ -35,7 +37,7 @@ namespace WarNotes.View
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile(_categoryService);
+            UserProfile backToProfile = new UserProfile(_categoryService, _articleService);
             backToProfile.Show();
             Hide();
         }

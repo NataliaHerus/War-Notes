@@ -10,11 +10,13 @@ namespace WarNotes.View
     {
         UserDetailDTO user;
         private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
 
-        public UpdateView(ICategoryService categoryService)
+        public UpdateView(ICategoryService categoryService, IArticleService articleService)
         {
             InitializeComponent();
             _categoryService = categoryService;
+            _articleService = articleService;
 
             user = new UserDetailDTO();
             user.FirstName = "Anna";
@@ -70,7 +72,7 @@ namespace WarNotes.View
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile(_categoryService);
+            UserProfile backToProfile = new UserProfile(_categoryService, _articleService);
             backToProfile.Show();
             Hide();
         }

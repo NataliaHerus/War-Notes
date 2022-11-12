@@ -19,11 +19,13 @@ namespace WarNotes.View
     public partial class UserProfile : Window
     {
         private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
 
-        public UserProfile(ICategoryService categoryService)
+        public UserProfile(ICategoryService categoryService, IArticleService articleService)
         {
             InitializeComponent();
             _categoryService = categoryService;
+            _articleService = articleService;
 
             UserDetailDTO user = new UserDetailDTO();
             user.FirstName = "Anna";
@@ -33,27 +35,27 @@ namespace WarNotes.View
         }
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            MainView exitView = new MainView(_categoryService);
+            MainView exitView = new MainView(_categoryService, _articleService);
             exitView.Show();
             Hide();
         }
 
         private void openLiked_Click(object sender, RoutedEventArgs e)
         {
-            LikedArticlesView openLiked = new LikedArticlesView(_categoryService);
+            LikedArticlesView openLiked = new LikedArticlesView(_categoryService, _articleService);
             openLiked.Show();
             Hide();
 
         }
         private void openSaved_Click(object sender, RoutedEventArgs e)
         {
-            SavedArticlesView openSaved = new SavedArticlesView(_categoryService);
+            SavedArticlesView openSaved = new SavedArticlesView(_categoryService, _articleService);
             openSaved.Show();
             Hide();
         }
         private void update_Click(object sender, RoutedEventArgs e)
         {
-            UpdateView update = new UpdateView(_categoryService);
+            UpdateView update = new UpdateView(_categoryService, _articleService);
             update.Show();
             Hide();
         }

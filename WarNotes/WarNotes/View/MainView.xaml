@@ -26,8 +26,8 @@
             </LinearGradientBrush>
 
         </Border.Background>
-        
-        
+
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <!--Navigation menu-->
@@ -58,8 +58,8 @@
 
                     <!--Menu Buttons-->
                     <StackPanel x:Name="categories">
-                        
-                        
+
+
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -142,19 +142,19 @@
                             </Button.Template>
                         </Button>
                     </StackPanel>
-                    <StackPanel x:Name="headers"
-                                Grid.Row="2"
-                                Margin="25">
-
+                    <StackPanel x:Name="headers" Grid.Row="2" Margin="25">
 
                     </StackPanel>
-                    <StackPanel>
-                        <TextBlock x:Name="txtArt" Text="" TextWrapping="Wrap"/>
-                    </StackPanel>
+
+                    <ScrollViewer x:Name="scrollerBlock" Grid.Row="1000" Margin="25" Visibility="Hidden">
+                        <StackPanel x:Name="articleBlock">
+
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
-                
-            </Border>
 
+            </Border>
         </Grid>
+
     </Border>
 </Window>

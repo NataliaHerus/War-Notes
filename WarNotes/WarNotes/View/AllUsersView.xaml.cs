@@ -19,11 +19,13 @@ namespace WarNotes.View
     public partial class AllUsersView : Window
     {
         private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
 
-        public AllUsersView(ICategoryService categoryService)
+        public AllUsersView(ICategoryService categoryService, IArticleService articleService)
         {
             InitializeComponent();
             _categoryService = categoryService;
+            _articleService = articleService;
 
             List<UserForAdminDTO> users = new List<UserForAdminDTO>();
             users.Add(new UserForAdminDTO() {FirstName = "Анна", LastName = "Берко", Email = "berko@gmail.com" });
@@ -42,7 +44,7 @@ namespace WarNotes.View
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            AdminProfileView exit = new AdminProfileView(_categoryService);
+            AdminProfileView exit = new AdminProfileView(_categoryService, _articleService);
             exit.Show();
             Hide();
         }

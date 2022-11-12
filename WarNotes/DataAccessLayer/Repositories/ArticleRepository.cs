@@ -21,5 +21,12 @@ namespace DataAccessLayer.Repositories
                 .Where(a => a.Category.CategoryName == categoryName)
                 .Select(a => a.Title);
         }
+
+        public Article GetArticleByTitle(string title, int categoryId)
+        {
+            return _dbContext
+                .Articles
+                .First(a => a.CategoryId == categoryId && a.Title == title);
+        }
     }
 }

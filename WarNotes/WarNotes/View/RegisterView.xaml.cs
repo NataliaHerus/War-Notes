@@ -8,19 +8,18 @@ using BusinessLogicLayer.Validators;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for RegisterView.xaml
-    /// </summary>
     public partial class RegisterView : Window
     {
         protected readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
 
-        public RegisterView(IUserService userService, ICategoryService categoryService)
+        public RegisterView(IUserService userService, ICategoryService categoryService, IArticleService articleService)
         {
             InitializeComponent();
             _userService = userService;
             _categoryService = categoryService;
+            _articleService = articleService;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -121,7 +120,7 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView(_userService, _categoryService);
+            LoginView loginView = new LoginView(_userService, _categoryService, _articleService);
             loginView.Show();
             Hide();
         }

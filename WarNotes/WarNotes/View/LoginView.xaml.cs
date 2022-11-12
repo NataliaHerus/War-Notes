@@ -23,12 +23,14 @@ namespace WarNotes.View
     {
         protected readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
 
-        public LoginView(IUserService userService, ICategoryService categoryService)
+        public LoginView(IUserService userService, ICategoryService categoryService, IArticleService articleService)
         {
             InitializeComponent();
             _userService = userService;
             _categoryService = categoryService;
+            _articleService = articleService;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -49,14 +51,14 @@ namespace WarNotes.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainView registerView = new MainView(_categoryService);
+            MainView registerView = new MainView(_categoryService, _articleService);
             registerView.Show();
             Hide();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterView registerView = new RegisterView(_userService, _categoryService);
+            RegisterView registerView = new RegisterView(_userService, _categoryService, _articleService);
             registerView.Show();
             Hide();
         }
