@@ -122,7 +122,7 @@
                             <Image Source="/Images/user.png" Height="23" Width="23"/>
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Red"/>
+                                    <Setter Property="Background" Value="#BF80FF"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="Pink"/>

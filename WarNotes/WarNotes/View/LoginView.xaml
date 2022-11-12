@@ -180,17 +180,17 @@
                             BorderThickness="0"
                             Content="Увійти"
                             Foreground="Black"
-                            FontSize="12"
+                            FontSize="14"
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
                             Margin="0,20,0,0"
                             Click="btnLogin_Click">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="Red"/>
+                                <Setter Property="Background" Value="#FFAC84"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Pink"/>
+                                        <Setter Property="Background" Value="#FF9E5A"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
