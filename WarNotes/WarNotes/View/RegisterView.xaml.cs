@@ -14,10 +14,13 @@ namespace WarNotes.View
     public partial class RegisterView : Window
     {
         protected readonly IUserService _userService;
-        public RegisterView(IUserService userService)
+        private readonly ICategoryService _categoryService;
+
+        public RegisterView(IUserService userService, ICategoryService categoryService)
         {
             InitializeComponent();
             _userService = userService;
+            _categoryService = categoryService;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -118,7 +121,7 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView(_userService);
+            LoginView loginView = new LoginView(_userService, _categoryService);
             loginView.Show();
             Hide();
         }

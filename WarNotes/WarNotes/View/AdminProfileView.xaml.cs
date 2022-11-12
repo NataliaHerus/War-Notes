@@ -1,28 +1,18 @@
 ﻿using BusinessLogicLayer.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessLogicLayer.Services.Interfaces;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for AdminProfileView.xaml
-    /// </summary>
     public partial class AdminProfileView : Window
     {
-        public AdminProfileView()
+        private readonly ICategoryService _categoryService;
+
+        public AdminProfileView(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoryService = categoryService;
+
             UserDetailDTO user = new UserDetailDTO();
             user.FirstName = "Admin";
             user.Email = "admin@gmail.com";
@@ -31,14 +21,14 @@ namespace WarNotes.View
 
         private void showUsers_Click(object sender, RoutedEventArgs e)
         {
-            AllUsersView openUsers = new AllUsersView();
+            AllUsersView openUsers = new AllUsersView(_categoryService);
             openUsers.Show();
             Hide();
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            MainView exitView = new MainView();
+            MainView exitView = new MainView(_categoryService);
             exitView.Show();
             Hide();
         }

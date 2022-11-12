@@ -33,6 +33,9 @@ namespace WarNotes
                         options.UseNpgsql(sqlConnectionString));
                     services.AddScoped<IUserService, UserService>();
                     services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+                    services.AddScoped<IArticleRepository, ArticleRepository>();
+                    services.AddScoped<IArticleService, ArticleService>();
+                    services.AddScoped<ICategoryService, CategoryService>();
 
                     services.AddSingleton<LoginView>();
                     

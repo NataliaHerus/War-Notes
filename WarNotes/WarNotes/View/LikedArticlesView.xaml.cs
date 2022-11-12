@@ -1,28 +1,19 @@
 ﻿using BusinessLogicLayer.DTO;
-using System;
+using BusinessLogicLayer.Services.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for LikedArticlesView.xaml
-    /// </summary>
     public partial class LikedArticlesView : Window
     {
-        public LikedArticlesView()
+        private readonly ICategoryService _categoryService;
+
+        public LikedArticlesView(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoryService = categoryService;
+
             List<ArticleDTO> items = new List<ArticleDTO>();
             items.Add(new ArticleDTO() { Title = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa?" });
             items.Add(new ArticleDTO() { Title = "Стаття 234" });
@@ -39,18 +30,18 @@ namespace WarNotes.View
             items.Add(new ArticleDTO() { Title = "Що має бути в аптечці для надзвичайних ситуацій?" });
 
             LikedArticlesList.ItemsSource = items;
-            
+
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile();
+            UserProfile backToProfile = new UserProfile(_categoryService);
             backToProfile.Show();
             Hide();
         }
 
-        
 
-     
+
+
     }
 }

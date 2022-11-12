@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -21,28 +22,37 @@ namespace WarNotes.View
     /// </summary>
     public partial class MainView : Window
     {
+        private readonly ICategoryService _categoryService;
+
         public string TextArticle { get; set; }
-        public MainView()
+
+        public MainView(ICategoryService categoryService)
         {
+            _categoryService = categoryService;
+
             InitializeComponent();
             LoadCategories();
-            LoadHeaders();
-            
+            /*LoadHeaders();*/
         }
-        private void LoadCategories()
+
+        private async Task LoadCategories()
         {
-            for (int i = 0; i < 4; i++)
+            var allCategories = await _categoryService.GetAllCategoriesAsync();
+
+            for(int i = 0; i < allCategories.Count(); i++)
             {
-                RadioButton rb = new RadioButton() { Content = "Category " + i };
+                var rb = new RadioButton() { Content = allCategories.ElementAt(i).CategoryName };
 
                 rb.Tag = i;
+                rb.Click += LoadHeaders;
 
                 rb.Style = (Style)FindResource("categoryButton");
 
                 categories.Children.Add(rb);
             }
         }
-        private void LoadHeaders()
+
+        private void LoadHeaders(string categoryName)
         {
             for (int i = 0; i < 9; i++)
             {
@@ -55,11 +65,19 @@ namespace WarNotes.View
                 headers.Children.Add(rb);
             }
         }
+
+        private void LoadHeaders(object sender, RoutedEventArgs e)
+        {
+            var categoryName = ((RadioButton)sender).Content;
+            //LoadHeaders(categoryName);
+        }
+
         private void LoadArticles(object sender, RoutedEventArgs e)
         {
             TextArticle = "jdhbfjhdbfjhbfkgjbnkfjgnbkjfngkbjfnkgnbfkhbgjhbfjghb jgbjfhg jgbjf gjhr gbhr gtbh rgh jrhg rh bir igh brjh gbjhr gbr hb rhg bjr brh gjh rg brh gbbrh gbj ";
             this.txtArt.Text = TextArticle;
         }
+
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -82,7 +100,7 @@ namespace WarNotes.View
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
             //if role == user
-            UserProfile userProfile = new UserProfile();
+            UserProfile userProfile = new UserProfile(_categoryService);
             userProfile.Show();
             Hide();
 

@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,15 @@ using System.Windows.Shapes;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for AllUsersView.xaml
-    /// </summary>
     public partial class AllUsersView : Window
     {
-        public AllUsersView()
+        private readonly ICategoryService _categoryService;
+
+        public AllUsersView(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoryService = categoryService;
+
             List<UserForAdminDTO> users = new List<UserForAdminDTO>();
             users.Add(new UserForAdminDTO() {FirstName = "Анна", LastName = "Берко", Email = "berko@gmail.com" });
             users.Add(new UserForAdminDTO() { FirstName = "Олег", LastName = "Сопко", Email = "osopko22@gmail.com" });
@@ -40,7 +42,7 @@ namespace WarNotes.View
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            AdminProfileView exit = new AdminProfileView();
+            AdminProfileView exit = new AdminProfileView(_categoryService);
             exit.Show();
             Hide();
         }

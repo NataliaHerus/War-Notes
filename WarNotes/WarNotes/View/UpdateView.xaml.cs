@@ -1,31 +1,21 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using BusinessLogicLayer.Services.Interfaces;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for UpdateView.xaml
-    /// </summary>
     public partial class UpdateView : Window
     {
         UserDetailDTO user;
-        public UpdateView()
+        private readonly ICategoryService _categoryService;
+
+        public UpdateView(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoryService = categoryService;
+
             user = new UserDetailDTO();
             user.FirstName = "Anna";
             user.LastName = "Koshmal";
@@ -80,7 +70,7 @@ namespace WarNotes.View
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile();
+            UserProfile backToProfile = new UserProfile(_categoryService);
             backToProfile.Show();
             Hide();
         }
