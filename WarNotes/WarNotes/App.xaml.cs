@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer;
+using BusinessLogicLayer.Authentication;
 using BusinessLogicLayer.Services;
 using BusinessLogicLayer.Services.Interfaces;
 using DataAccessLayer.EntityFramework;
@@ -32,6 +33,8 @@ namespace WarNotes
                     services.AddDbContext<WarNotesContext>(options =>
                         options.UseNpgsql(sqlConnectionString));
                     services.AddScoped<IUserService, UserService>();
+                    services.AddScoped<IAuthenticationService, AuthenticationService>();
+                    services.AddScoped<IAuthenticator, Authenticator>();
                     services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
                     services.AddSingleton<LoginView>();
@@ -44,7 +47,7 @@ namespace WarNotes
                     IMapper mapper = mapperConfig.CreateMapper();
                     services.AddSingleton(mapper);
                     services.AddSingleton<MainView>();
-                    
+
                 })
                 .Build();
         }

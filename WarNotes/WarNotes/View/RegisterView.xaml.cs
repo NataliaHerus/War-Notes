@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using BusinessLogicLayer.Validators;
+using BusinessLogicLayer.Authentication;
 
 namespace WarNotes.View
 {
@@ -14,10 +15,12 @@ namespace WarNotes.View
     public partial class RegisterView : Window
     {
         protected readonly IUserService _userService;
-        public RegisterView(IUserService userService)
+        protected readonly IAuthenticator _authenticator;
+        public RegisterView(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
             _userService = userService;
+            _authenticator = authenticator;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -118,7 +121,7 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView(_userService);
+            LoginView loginView = new LoginView(_userService, _authenticator);
             loginView.Show();
             Hide();
         }

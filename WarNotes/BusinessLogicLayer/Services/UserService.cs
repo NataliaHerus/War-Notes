@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.EntityFramework;
+using BusinessLogicLayer.DTO;
 
 namespace BusinessLogicLayer.Services
 {
@@ -35,11 +36,10 @@ namespace BusinessLogicLayer.Services
             return _mapper.Map<UserRegistrationDTO>(newUser);
         }
 
-        public UserRegistrationDTO GetUserByEmailAsync(string email)
+        public UserDetailDTO GetUserByEmailAsync(string email)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
-
-            return _mapper.Map<UserRegistrationDTO>(user); 
+            return _mapper.Map<UserDetailDTO>(user); 
         }
     }
 }

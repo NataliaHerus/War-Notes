@@ -1,18 +1,11 @@
 ﻿using BusinessLogicLayer.Services.Interfaces;
-using DataAccessLayer.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessLogicLayer.Authentication;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System;
+using System.ComponentModel;
+using BusinessLogicLayer.DTO;
+using BusinessLogicLayer;
 
 namespace WarNotes.View
 {
@@ -22,12 +15,18 @@ namespace WarNotes.View
     public partial class LoginView : Window
     {
         protected readonly IUserService _userService;
-        public LoginView(IUserService userService)
+        protected readonly IAuthenticator _authenticator;
+        protected readonly UserDetailDTO user;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public LoginView(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
             _userService = userService;
-        }
+            _authenticator = authenticator;
 
+            user = new UserDetailDTO();
+            this.DataContext = user;
+        }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -46,14 +45,29 @@ namespace WarNotes.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MainView registerView = new MainView();
-            registerView.Show();
-            Hide();
+            string password = txtPass.Password.Trim();
+            Hasher hash = new Hasher(password);
+            string hashedPassword = hash.ComputeHash();
+
+            try
+            {
+                _authenticator.Login(user.Email, hashedPassword);
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show(ex.Message);
+            }
+            if (_authenticator.IsLoggedIn)
+            {
+                MainView registerView = new MainView();
+                registerView.Show();
+                Hide();
+            }
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterView registerView = new RegisterView(this._userService);
+            RegisterView registerView = new RegisterView(_userService, _authenticator);
             registerView.Show();
             Hide();
         }

@@ -134,7 +134,8 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,120,0,0"/>
-                    <TextBox x:Name="txtUser"
+                    <TextBox Text ="{Binding Email}"
+                        x:Name="txtUser"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            

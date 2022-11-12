@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer.Services.DTO;
+﻿using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace BusinessLogicLayer.Services.Interfaces
     public interface IUserService
     {
         Task<UserRegistrationDTO> CreateUserAsync(UserRegistrationDTO query);
-        UserRegistrationDTO GetUserByEmailAsync(string email);
+        UserDetailDTO GetUserByEmailAsync(string email);
     }
 }
