@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -21,6 +23,8 @@ namespace WarNotes.View
     /// </summary>
     public partial class MainView : Window
     {
+        protected readonly IUserService _userService;
+        protected readonly IAuthenticator _authenticator;
         public string TextArticle { get; set; }
         public MainView()
         {
@@ -96,7 +100,14 @@ namespace WarNotes.View
             adminProfile.Show();
             Hide();*/
         }
-        
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView loginView = new LoginView(_userService, _authenticator);
+            loginView.Show();
+            Hide();
+        }
+
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
             if (this.WindowState == WindowState.Normal)
