@@ -85,7 +85,16 @@ namespace WarNotes.View
         }
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            
+            //if role == user
+            UserProfile userProfile = new UserProfile();
+            userProfile.Show();
+            Hide();
+
+
+           //if role == admin
+            /*AdminProfileView adminProfile = new AdminProfileView();
+            adminProfile.Show();
+            Hide();*/
         }
         
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
