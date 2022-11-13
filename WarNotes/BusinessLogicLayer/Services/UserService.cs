@@ -47,5 +47,11 @@ namespace BusinessLogicLayer.Services
              _mapper.Map(dto, user);
             _userRepository.SaveChangesAcync();
         }
+
+        public List<UserDetailDTO> GetAllUsersListAsync()
+        {
+            var users = _dbContext.Users.ToList();
+            return _mapper.Map<List<UserDetailDTO>>(users);
+        }
     }
 }
