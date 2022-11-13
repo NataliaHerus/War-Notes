@@ -26,12 +26,13 @@ namespace WarNotes.View
         protected readonly IUserService _userService;
         protected readonly IAuthenticator _authenticator;
         public string TextArticle { get; set; }
-        public MainView()
+        public MainView(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
             LoadCategories();
             LoadHeaders();
-            
+            _userService = userService;
+            _authenticator = authenticator;   
         }
         private void LoadCategories()
         {
@@ -90,7 +91,7 @@ namespace WarNotes.View
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
             //if role == user
-            UserProfile userProfile = new UserProfile();
+            UserProfile userProfile = new UserProfile(_userService, _authenticator);
             userProfile.Show();
             Hide();
 
@@ -104,6 +105,7 @@ namespace WarNotes.View
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             LoginView loginView = new LoginView(_userService, _authenticator);
+            _authenticator.Logout();
             loginView.Show();
             Hide();
         }

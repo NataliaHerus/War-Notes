@@ -1,4 +1,6 @@
-﻿using BusinessLogicLayer.DTO;
+﻿using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,9 @@ namespace WarNotes.View
     /// </summary>
     public partial class SavedArticlesView : Window
     {
-        public SavedArticlesView()
+        protected readonly IUserService _userService;
+        protected readonly IAuthenticator _authenticator;
+        public SavedArticlesView(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
             List<ArticleDTO> items = new List<ArticleDTO>();
@@ -39,12 +43,14 @@ namespace WarNotes.View
             items.Add(new ArticleDTO() { Title = "Що має бути в аптечці для надзвичайних ситуацій?" });
 
             SavedArticlesList.ItemsSource = items;
+            _userService = userService;
+            _authenticator = authenticator;
 
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile();
+            UserProfile backToProfile = new UserProfile(_userService, _authenticator);
             backToProfile.Show();
             Hide();
         }

@@ -1,5 +1,7 @@
 ﻿using BusinessLogicLayer;
+using BusinessLogicLayer.Authentication;
 using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,9 @@ namespace WarNotes.View
     public partial class UpdateView : Window
     {
         UserDetailDTO user;
-        public UpdateView()
+        protected readonly IUserService _userService;
+        protected readonly IAuthenticator _authenticator;
+        public UpdateView(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
             user = new UserDetailDTO();
@@ -80,7 +84,7 @@ namespace WarNotes.View
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile();
+            UserProfile backToProfile = new UserProfile(_userService, _authenticator);
             backToProfile.Show();
             Hide();
         }

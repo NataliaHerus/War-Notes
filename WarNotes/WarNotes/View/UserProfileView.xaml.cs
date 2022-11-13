@@ -1,4 +1,6 @@
-﻿using BusinessLogicLayer.DTO;
+﻿using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,9 @@ namespace WarNotes.View
     /// </summary>
     public partial class UserProfile : Window
     {
-        public UserProfile()
+        protected readonly IUserService _userService;
+        protected readonly IAuthenticator _authenticator;
+        public UserProfile(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
             UserDetailDTO user = new UserDetailDTO();
@@ -28,30 +32,32 @@ namespace WarNotes.View
             user.LastName = "Koshmal";
             user.Email = "anna@gmail.com";
             this.DataContext = user;
+            _userService = userService;
+            _authenticator = authenticator;
         }
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            MainView exitView = new MainView();
+            MainView exitView = new MainView(_userService, _authenticator);
             exitView.Show();
             Hide();
         }
 
         private void openLiked_Click(object sender, RoutedEventArgs e)
         {
-            LikedArticlesView openLiked = new LikedArticlesView();
+            LikedArticlesView openLiked = new LikedArticlesView(_userService, _authenticator);
             openLiked.Show();
             Hide();
 
         }
         private void openSaved_Click(object sender, RoutedEventArgs e)
         {
-            SavedArticlesView openSaved = new SavedArticlesView();
+            SavedArticlesView openSaved = new SavedArticlesView(_userService, _authenticator);
             openSaved.Show();
             Hide();
         }
         private void update_Click(object sender, RoutedEventArgs e)
         {
-            UpdateView update = new UpdateView();
+            UpdateView update = new UpdateView(_userService, _authenticator);
             update.Show();
             Hide();
         }

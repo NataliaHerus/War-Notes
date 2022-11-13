@@ -59,7 +59,7 @@ namespace WarNotes.View
             }
             if (_authenticator.IsLoggedIn)
             {
-                MainView registerView = new MainView();
+                MainView registerView = new MainView(_userService, _authenticator);
                 registerView.Show();
                 Hide();
             }
