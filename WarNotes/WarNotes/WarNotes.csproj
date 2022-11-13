@@ -11,11 +11,11 @@
   <ItemGroup>
     <None Remove="Images\background.png" />
     <None Remove="Images\background2.jpeg" />
-    <None Remove="Images\buttonSave.png" />
     <None Remove="Images\dog.png" />
     <None Remove="Images\image_2022-10-26_18-00-06.png" />
     <None Remove="Images\key.png" />
     <None Remove="Images\like.png" />
+    <None Remove="Images\likePressed.png" />
     <None Remove="Images\Materials\Category1\photo1.png" />
     <None Remove="Images\Materials\Category1\photo2.png" />
     <None Remove="Images\Materials\Category1\photo3.png" />
@@ -41,6 +41,8 @@
     <None Remove="Images\Materials\Category5\photo3.png" />
     <None Remove="Images\menu.png" />
     <None Remove="Images\pngwinguser.png" />
+    <None Remove="Images\save.png" />
+    <None Remove="Images\savePressed.png" />
     <None Remove="Images\user.png" />
     <None Remove="Sounds\chymical danger.wav" />
     <None Remove="Sounds\test.wav" />
@@ -104,10 +106,12 @@
   <ItemGroup>
     <Resource Include="Images\background.png" />
     <Resource Include="Images\background2.jpeg" />
-    <Resource Include="Images\buttonSave.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\savePressed.png" />
     <Resource Include="Images\dog.png" />
     <Resource Include="Images\key.png" />
     <Resource Include="Images\like.png" />
+    <Resource Include="Images\likePressed.png" />
     <Resource Include="Images\Materials\Category1\photo1.png" />
     <Resource Include="Images\Materials\Category1\photo2.png" />
     <Resource Include="Images\Materials\Category1\photo3.png" />

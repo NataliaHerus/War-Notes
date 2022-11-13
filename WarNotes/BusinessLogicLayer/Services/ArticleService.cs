@@ -22,10 +22,45 @@ namespace BusinessLogicLayer.Services
             return _articleRepository.GetArticleHeadersByCategoryName(categoryName);
         }
 
+        public string GetArticleTitleById(int id)
+        {
+            return _articleRepository.GetArticleTitleById(id);
+        }
+
         public ArticleDTO GetArticleByTitle(string title, int categoryId)
         {
             var article = _articleRepository.GetArticleByTitle(title, categoryId);
             return _mapper.Map<ArticleDTO>(article);
+        }
+
+        public bool ArticleIsLikedByUserId(int userId, int articleId)
+        {
+            return _articleRepository.ArticleIsLikedByUserId(userId, articleId);
+        }
+
+        public bool ArticleIsSavedByUserId(int userId, int articleId)
+        {
+            return _articleRepository.ArticleIsSavedByUserId(userId, articleId);
+        }
+
+        public void AddLikedArticle(int userId, int articleId)
+        {
+            _articleRepository.AddLikedArticle(userId, articleId);
+        }
+
+        public void DeleteLikedArticle(int userId, int articleId)
+        {
+            _articleRepository.DeleteLikedArticle(userId, articleId);
+        }
+
+        public void AddSavedArticle(int userId, int articleId)
+        {
+            _articleRepository.AddSavedArticle(userId, articleId);
+        }
+
+        public void DeleteSavedArticle(int userId, int articleId)
+        {
+            _articleRepository.DeleteSavedArticle(userId, articleId);
         }
     }
 }

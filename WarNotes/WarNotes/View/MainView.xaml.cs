@@ -14,7 +14,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Media;
-using System.Collections.Generic;
 using BusinessLogicLayer.DTO;
 
 namespace WarNotes.View
@@ -27,6 +26,7 @@ namespace WarNotes.View
         private readonly IAuthenticator _authenticator;
 
         public int SelectedCategoryId { get; set; }
+        public int SelectedArticleId { get; set; }
 
         public MainView(
             ICategoryService categoryService,
@@ -109,6 +109,8 @@ namespace WarNotes.View
             article.Text = article.Text.Replace(@"\n", "\n");
             article.Text = article.Text.Replace(@"\t", "\t");
 
+            SelectedArticleId = article.Id;
+
             var blocksOfText = article.Text.Split("(ФОТО:");
 
             foreach(var block in blocksOfText)
@@ -122,29 +124,7 @@ namespace WarNotes.View
                     articleBlock.Children.Add(sound);
             }
 
-            var buttonBack = new Button { Content = "Назад", Style = (Style)FindResource("backButton") };
-            buttonBack.Click += BackClicked;
-
-
-            var img = new Image()
-            {
-                Width = 23,
-                Height = 23,
-                Source = new BitmapImage(new Uri($"../Images/like.png", UriKind.RelativeOrAbsolute))
-            };
-
-            var img2 = new Image()
-            {
-                Width = 23,
-                Height = 23,
-                Source = new BitmapImage(new Uri($"../Images/buttonSave.png", UriKind.RelativeOrAbsolute))
-            };
-
-            articleBlock.Children.Add(img);
-            articleBlock.Children.Add(img2);
-
-            articleBlock.Children.Add(buttonBack);
-            
+            DisplayButtons();
         }
 
         private void DisplayArticle(string text)
@@ -224,6 +204,74 @@ namespace WarNotes.View
             return soundButtons;
         }
 
+        private void DisplayButtons()
+        {
+            var buttonBack = new Button { Content = "Назад", Style = (Style)FindResource("backButton") };
+            buttonBack.Click += BackClicked;
+
+            var userId = _authenticator.CurrentAccount.Id;
+            string buttonPath;
+
+            if (_articleService.ArticleIsLikedByUserId(userId, SelectedArticleId))
+                buttonPath = $"../Images/likePressed.png";
+            else
+                buttonPath = $"../Images/like.png";
+
+            var likeButton = new Image()
+            {
+                Width = 31,
+                Height = 31,
+                Source = new BitmapImage(new Uri(buttonPath, UriKind.RelativeOrAbsolute))
+            };
+
+            if (_articleService.ArticleIsSavedByUserId(userId, SelectedArticleId))
+                buttonPath = $"../Images/savePressed.png";
+            else
+                buttonPath = $"../Images/save.png";
+
+            var saveButton = new Image()
+            {
+                Width = 31,
+                Height = 31,
+                Source = new BitmapImage(new Uri(buttonPath, UriKind.RelativeOrAbsolute))
+            };
+
+
+            likeButton.MouseLeftButtonDown += LikeClicked;
+            saveButton.MouseLeftButtonDown += SaveClicked;
+
+            articleBlock.Children.Add(likeButton);
+            articleBlock.Children.Add(saveButton);
+
+            articleBlock.Children.Add(buttonBack);
+        }
+
+        private void LikeClicked(object sender, RoutedEventArgs e)
+        {
+            var userId = _authenticator.CurrentAccount.Id;
+
+            if (_articleService.ArticleIsLikedByUserId(userId, SelectedArticleId))
+                _articleService.DeleteLikedArticle(userId, SelectedArticleId);
+            else
+                _articleService.AddLikedArticle(userId, SelectedArticleId);
+
+            var articleHeader = _articleService.GetArticleTitleById(SelectedArticleId);
+            LoadArticle(articleHeader);
+        }
+
+        private void SaveClicked(object sender, RoutedEventArgs e)
+        {
+            var userId = _authenticator.CurrentAccount.Id;
+
+            if (_articleService.ArticleIsSavedByUserId(userId, SelectedArticleId))
+                _articleService.DeleteSavedArticle(userId, SelectedArticleId);
+            else
+                _articleService.AddSavedArticle(userId, SelectedArticleId);
+
+            var articleHeader = _articleService.GetArticleTitleById(SelectedArticleId);
+            LoadArticle(articleHeader);
+        }
+
         private async void BackClicked(object sender, RoutedEventArgs e)
         {
             articleBlock.Children.Clear();
@@ -236,23 +284,28 @@ namespace WarNotes.View
 
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             WindowInteropHelper helper = new WindowInteropHelper(this);
             SendMessage(helper.Handle, 161, 2, 0);
         }
+        
         private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
         {
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
+        
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+        
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
+        
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
             if (_authenticator.CurrentAccount.Role is Role.User)
@@ -269,6 +322,7 @@ namespace WarNotes.View
                 Hide();
             }
         }
+        
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             LoginView loginView = new LoginView(_userService, _categoryService, _articleService, _authenticator);
