@@ -113,7 +113,27 @@ namespace WarNotes.View
 
             var buttonBack = new Button { Content = "Назад", Style = (Style)FindResource("backButton") };
             buttonBack.Click += BackClicked;
+
+
+            var img = new Image()
+            {
+                Width = 23,
+                Height = 23,
+                Source = new BitmapImage(new Uri($"../Images/like.png", UriKind.RelativeOrAbsolute))
+            };
+
+            var img2 = new Image()
+            {
+                Width = 23,
+                Height = 23,
+                Source = new BitmapImage(new Uri($"../Images/buttonSave.png", UriKind.RelativeOrAbsolute))
+            };
+
+            articleBlock.Children.Add(img);
+            articleBlock.Children.Add(img2);
+
             articleBlock.Children.Add(buttonBack);
+            
         }
 
         private void DisplayArticle(string text)
