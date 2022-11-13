@@ -189,7 +189,7 @@
                 </Button>
                 <Button x:Name="exit"                          
                             BorderThickness="0"
-                            Content="Вийти"
+                            Content="Назад"
                             Foreground="Black"
                             FontSize="15"
                             FontWeight="Bold"

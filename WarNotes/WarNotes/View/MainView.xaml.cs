@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.Enums;
 using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -90,16 +91,19 @@ namespace WarNotes.View
         }
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            //if role == user
-            UserProfile userProfile = new UserProfile(_userService, _authenticator);
-            userProfile.Show();
-            Hide();
+            if (_authenticator.CurrentAccount.Role is Role.User)
+            {
+                UserProfile userProfile = new UserProfile(_userService, _authenticator);
+                userProfile.Show();
+                Hide();
+            }
 
-
-           //if role == admin
-            /*AdminProfileView adminProfile = new AdminProfileView();
-            adminProfile.Show();
-            Hide();*/
+            if (_authenticator.CurrentAccount.Role is Role.Admin)
+            {
+                AdminProfileView adminProfile = new AdminProfileView(_userService, _authenticator);
+                adminProfile.Show();
+                Hide();
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
