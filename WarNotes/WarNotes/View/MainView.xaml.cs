@@ -11,20 +11,16 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Media;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using BusinessLogicLayer.DTO;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
     public partial class MainView : Window
     {
         private readonly ICategoryService _categoryService;
         private readonly IArticleService _articleService;
 
-        public string TextArticle { get; set; }
         public int SelectedCategoryId { get; set; }
 
         public MainView(ICategoryService categoryService, IArticleService articleService)
@@ -106,58 +102,32 @@ namespace WarNotes.View
 
             foreach(var block in blocksOfText)
             {
-                var text = block;
-                if (text.Contains("photo"))
-                {
-                    int pFrom = block.IndexOf("photo");
-                    int pTo = block.LastIndexOf(".png") + ".png".Length;
+                var text = GetPhotos(block, article);
+                var soundButtons = GetSounds(ref text);
 
-                    var photoName = block.Substring(pFrom, pTo - pFrom);
-                    text = text.Replace(photoName + ")", "");
-
-                    var img = new Image()
-                    {
-                        Width = 400,
-                        Height = 300,
-                        Source = new BitmapImage(new Uri($"../Images/Materials/Category{article.CategoryId}/{photoName}", UriKind.RelativeOrAbsolute))
-                    };
-
-                    articleBlock.Children.Add(img);
-                }
-
-                var soundButtons = new List<Button>();
-                if (text.Contains("(SOUND:"))
-                {
-                    var innerBlocks = text.Split("(SOUND:");
-                    for (int i = 1; i < innerBlocks.Length; i++)
-                    {
-                        int pFrom = 0;
-                        int pTo = innerBlocks[i].LastIndexOf(".wav") + ".wav".Length;
-
-                        var soundName = innerBlocks[i].Substring(pFrom, pTo - pFrom);
-                        text = text.Replace("(SOUND:" + soundName + ")", "");
-
-                        var soundBtn = new Button() { Content = soundName.Replace(".wav", "") };
-                        soundBtn.Click += SoundPlay;
-                        soundBtn.Style = (Style)FindResource("soundButton");
-                        soundButtons.Add(soundBtn);
-                    }
-                }
-
-                var myFlowDoc = new FlowDocument();
-                myFlowDoc.Blocks.Add(new Paragraph(new Run(text)));
-
-                var myRichTextBox = new RichTextBox() { IsReadOnly = true, FontSize = 16 };
-                myRichTextBox.Background = Brushes.Transparent;
-                myRichTextBox.BorderBrush = Brushes.Transparent;
-
-                myRichTextBox.Document = myFlowDoc;
-
-                articleBlock.Children.Add(myRichTextBox);
+                DisplayArticle(text);
 
                 foreach (var sound in soundButtons)
                     articleBlock.Children.Add(sound);
             }
+
+            var buttonBack = new Button { Content = "Назад", Style = (Style)FindResource("backButton") };
+            buttonBack.Click += BackClicked;
+            articleBlock.Children.Add(buttonBack);
+        }
+
+        private void DisplayArticle(string text)
+        {
+            var myFlowDoc = new FlowDocument();
+            myFlowDoc.Blocks.Add(new Paragraph(new Run(text)));
+
+            var myRichTextBox = new RichTextBox() { IsReadOnly = true, FontSize = 16 };
+            myRichTextBox.Background = Brushes.Transparent;
+            myRichTextBox.BorderBrush = Brushes.Transparent;
+
+            myRichTextBox.Document = myFlowDoc;
+
+            articleBlock.Children.Add(myRichTextBox);
         }
 
         private void SoundPlay(object sender, RoutedEventArgs e)
@@ -169,6 +139,68 @@ namespace WarNotes.View
             var player = new SoundPlayer(path);
 
             player.Play();
+        }
+
+        private string GetPhotos(string text, ArticleDTO article)
+        {
+            if (text.Contains("photo"))
+            {
+                int pFrom = text.IndexOf("photo");
+                int pTo = text.LastIndexOf(".png") + ".png".Length;
+
+                var photoName = text.Substring(pFrom, pTo - pFrom);
+                text = text.Replace(photoName + ")", "");
+
+                var img = new Image()
+                {
+                    Width = 400,
+                    Height = 300,
+                    Source = new BitmapImage(new Uri($"../Images/Materials/Category{article.CategoryId}/{photoName}", UriKind.RelativeOrAbsolute))
+                };
+
+                articleBlock.Children.Add(img);
+            }
+
+            return text;
+        }
+
+        private List<Button> GetSounds(ref string text)
+        {
+            var soundButtons = new List<Button>();
+
+            if (text.Contains("(SOUND:"))
+            {
+                var innerBlocks = text.Split("(SOUND:");
+                for (int i = 1; i < innerBlocks.Length; i++)
+                {
+                    int pFrom = 0;
+                    int pTo = innerBlocks[i].LastIndexOf(".wav") + ".wav".Length;
+
+                    var soundName = innerBlocks[i].Substring(pFrom, pTo - pFrom);
+                    text = text.Replace("(SOUND:" + soundName + ")", "");
+
+                    var soundBtn = new Button() 
+                    {
+                        Content = soundName.Replace(".wav", ""),
+                        Style = (Style)FindResource("soundButton") 
+                    };
+
+                    soundBtn.Click += SoundPlay;
+                    soundButtons.Add(soundBtn);
+                }
+            }
+
+            return soundButtons;
+        }
+
+        private async void BackClicked(object sender, RoutedEventArgs e)
+        {
+            articleBlock.Children.Clear();
+            headers.Visibility = Visibility.Visible;
+            scrollerBlock.Visibility = Visibility.Hidden;
+
+            var categoryName = await _categoryService.GetCategoryNameById(SelectedCategoryId);
+            LoadHeaders(categoryName);
         }
 
         [DllImport("user32.dll")]
