@@ -12,10 +12,7 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True">
-
-
-    
-
+   
     <Border CornerRadius="10"                    
             BorderThickness="1">
         <Border.Background>
@@ -27,8 +24,8 @@
 
         </Border.Background>
         
-        
-        <Grid>
+
+        <Grid x:Name="GridMenu">
             <Grid.ColumnDefinitions>
                 <!--Navigation menu-->
                 <ColumnDefinition Width="250"/>
@@ -41,27 +38,30 @@
                 <Border.Background>
                     <ImageBrush ImageSource="/Images/menu.png"/>
                 </Border.Background>
-                <StackPanel>
+                <Grid>
+                    <StackPanel>
 
-                    <!--Logo-->
-                    <StackPanel Orientation="Horizontal"
+                        <!--Logo-->
+                        <StackPanel Orientation="Horizontal"
                                 Height="35"
                                 Margin="15,25,0,40">
-                        <TextBlock Text="WAR NOTES"
+                            <TextBlock Text="WAR NOTES"
                                    Foreground="#24105F"
                                    FontSize="20"
                                    FontFamily="Montserrat"
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <!--Menu Buttons-->
-                    <StackPanel x:Name="categories">
-                        
-                        
+                        <!--Menu Buttons-->
+                        <StackPanel x:Name="categories">
+
+
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
+               
             </Border>
 
             <!--Main Section-->
@@ -122,7 +122,7 @@
                             <Image Source="/Images/user.png" Height="23" Width="23"/>
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background" Value="CornflowerBlue"/>
+                                    <Setter Property="Background" Value="#BF80FF"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="Pink"/>
@@ -170,19 +170,20 @@
                             </Button.Template>
                         </Button>
                     </StackPanel>
-                    <StackPanel x:Name="headers"
-                                Grid.Row="2"
-                                Margin="25">
 
+                    <StackPanel x:Name="headers" Grid.Row="2" Margin="25">
 
                     </StackPanel>
-                    <StackPanel>
-                        <TextBlock x:Name="txtArt" Text="" TextWrapping="Wrap"/>
-                    </StackPanel>
+
+                    <ScrollViewer x:Name="scrollerBlock" Grid.Row="1000" Margin="25" Visibility="Hidden">
+                        <StackPanel x:Name="articleBlock">
+
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
-                
-            </Border>
 
+            </Border>
         </Grid>
+
     </Border>
 </Window>

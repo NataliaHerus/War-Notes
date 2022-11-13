@@ -14,9 +14,80 @@
     <None Remove="Images\dog.png" />
     <None Remove="Images\image_2022-10-26_18-00-06.png" />
     <None Remove="Images\key.png" />
+    <None Remove="Images\like.png" />
+    <None Remove="Images\likePressed.png" />
+    <None Remove="Images\Materials\Category1\photo1.png" />
+    <None Remove="Images\Materials\Category1\photo2.png" />
+    <None Remove="Images\Materials\Category1\photo3.png" />
+    <None Remove="Images\Materials\Category1\photo4.png" />
+    <None Remove="Images\Materials\Category1\photo5.png" />
+    <None Remove="Images\Materials\Category1\photo6.png" />
+    <None Remove="Images\Materials\Category1\photo7.png" />
+    <None Remove="Images\Materials\Category1\photo8.png" />
+    <None Remove="Images\Materials\Category1\photo9.png" />
+    <None Remove="Images\Materials\Category2\photo1.png" />
+    <None Remove="Images\Materials\Category2\photo2.png" />
+    <None Remove="Images\Materials\Category2\photo3.png" />
+    <None Remove="Images\Materials\Category3\photo1.png" />
+    <None Remove="Images\Materials\Category3\photo2.png" />
+    <None Remove="Images\Materials\Category3\photo3.png" />
+    <None Remove="Images\Materials\Category3\photo4.png" />
+    <None Remove="Images\Materials\Category3\photo5.png" />
+    <None Remove="Images\Materials\Category3\photo6.png" />
+    <None Remove="Images\Materials\Category3\photo7.png" />
+    <None Remove="Images\Materials\Category4\photo1.png" />
+    <None Remove="Images\Materials\Category5\photo1.png" />
+    <None Remove="Images\Materials\Category5\photo2.png" />
+    <None Remove="Images\Materials\Category5\photo3.png" />
     <None Remove="Images\menu.png" />
     <None Remove="Images\pngwinguser.png" />
+    <None Remove="Images\save.png" />
+    <None Remove="Images\savePressed.png" />
     <None Remove="Images\user.png" />
+    <None Remove="Sounds\chymical danger.wav" />
+    <None Remove="Sounds\test.wav" />
+    <None Remove="Sounds\Вуличні бої.wav" />
+    <None Remove="Sounds\Загроза артобстрілу.wav" />
+    <None Remove="Sounds\Запуск і виліт ракети.wav" />
+    <None Remove="Sounds\Звук ракети що летить.wav" />
+    <None Remove="Sounds\Звук ракети що приближається.wav" />
+    <None Remove="Sounds\Повітряна тривога.wav" />
+    <None Remove="Sounds\Радіаційна небезпека.wav" />
+    <None Remove="Sounds\Хімічна небезпека - Copy.wav" />
+    <None Remove="Sounds\Хімічна небезпека.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sounds\test.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Вуличні бої.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Загроза артобстрілу.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Запуск і виліт ракети.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Звук ракети що летить.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Звук ракети що приближається.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Повітряна тривога.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Радіаційна небезпека.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\chymical danger.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Хімічна небезпека.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,10 +106,41 @@
   <ItemGroup>
     <Resource Include="Images\background.png" />
     <Resource Include="Images\background2.jpeg" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\savePressed.png" />
     <Resource Include="Images\dog.png" />
     <Resource Include="Images\key.png" />
+    <Resource Include="Images\like.png" />
+    <Resource Include="Images\likePressed.png" />
+    <Resource Include="Images\Materials\Category1\photo1.png" />
+    <Resource Include="Images\Materials\Category1\photo2.png" />
+    <Resource Include="Images\Materials\Category1\photo3.png" />
+    <Resource Include="Images\Materials\Category1\photo4.png" />
+    <Resource Include="Images\Materials\Category1\photo5.png" />
+    <Resource Include="Images\Materials\Category1\photo6.png" />
+    <Resource Include="Images\Materials\Category1\photo7.png" />
+    <Resource Include="Images\Materials\Category1\photo8.png" />
+    <Resource Include="Images\Materials\Category1\photo9.png" />
+    <Resource Include="Images\Materials\Category2\photo1.png" />
+    <Resource Include="Images\Materials\Category2\photo2.png" />
+    <Resource Include="Images\Materials\Category2\photo3.png" />
+    <Resource Include="Images\Materials\Category3\photo1.png" />
+    <Resource Include="Images\Materials\Category3\photo2.png" />
+    <Resource Include="Images\Materials\Category3\photo3.png" />
+    <Resource Include="Images\Materials\Category3\photo4.png" />
+    <Resource Include="Images\Materials\Category3\photo5.png" />
+    <Resource Include="Images\Materials\Category3\photo6.png" />
+    <Resource Include="Images\Materials\Category3\photo7.png" />
+    <Resource Include="Images\Materials\Category4\photo1.png" />
+    <Resource Include="Images\Materials\Category5\photo1.png" />
+    <Resource Include="Images\Materials\Category5\photo2.png" />
+    <Resource Include="Images\Materials\Category5\photo3.png" />
     <Resource Include="Images\menu.png" />
     <Resource Include="Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

@@ -9,24 +9,33 @@ using BusinessLogicLayer;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for LoginView.xaml
-    /// </summary>
     public partial class LoginView : Window
     {
-        protected readonly IUserService _userService;
-        protected readonly IAuthenticator _authenticator;
-        protected readonly UserDetailDTO user;
+        private readonly IUserService _userService;
+        private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
+        private readonly IAuthenticator _authenticator;
+        private readonly UserDetailDTO user;
+
         public event PropertyChangedEventHandler PropertyChanged;
-        public LoginView(IUserService userService, IAuthenticator authenticator)
+
+        public LoginView(
+            IUserService userService,
+            ICategoryService categoryService,
+            IArticleService articleService,
+            IAuthenticator authenticator)
         {
             InitializeComponent();
             _userService = userService;
+            _categoryService = categoryService;
+            _articleService = articleService;
             _authenticator = authenticator;
 
             user = new UserDetailDTO();
             this.DataContext = user;
+
         }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -59,7 +68,7 @@ namespace WarNotes.View
             }
             if (_authenticator.IsLoggedIn)
             {
-                MainView registerView = new MainView(_userService, _authenticator);
+                MainView registerView = new MainView(_categoryService, _articleService, _userService, _authenticator);
                 registerView.Show();
                 Hide();
             }
@@ -67,7 +76,8 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterView registerView = new RegisterView(_userService, _authenticator);
+            RegisterView registerView = new RegisterView(_userService, _categoryService, _articleService, _authenticator);
+
             registerView.Show();
             Hide();
         }

@@ -9,19 +9,26 @@ using BusinessLogicLayer.DTO;
 
 namespace WarNotes.View
 {
-    /// <summary>
-    /// Interaction logic for RegisterView.xaml
-    /// </summary>
     public partial class RegisterView : Window
     {
-        protected readonly IUserService _userService;
-        protected readonly IAuthenticator _authenticator;
-        public RegisterView(IUserService userService, IAuthenticator authenticator)
+        private readonly IUserService _userService;
+        private readonly ICategoryService _categoryService;
+        private readonly IArticleService _articleService;
+        private readonly IAuthenticator _authenticator;
+
+        public RegisterView(
+            IUserService userService,
+            ICategoryService categoryService,
+            IArticleService articleService,
+            IAuthenticator authenticator)
         {
             InitializeComponent();
             _userService = userService;
+            _categoryService = categoryService;
+            _articleService = articleService;
             _authenticator = authenticator;
         }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -121,7 +128,8 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView(_userService, _authenticator);
+            LoginView loginView = new LoginView(_userService, _categoryService, _articleService, _authenticator);
+            
             loginView.Show();
             Hide();
         }
