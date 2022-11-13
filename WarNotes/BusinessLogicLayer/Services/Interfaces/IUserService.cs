@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.DTO;
-using BusinessLogicLayer.Services.DTO;
+using DataAccessLayer.EntityFramework.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,8 @@ namespace BusinessLogicLayer.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserRegistrationDTO> CreateUserAsync(UserRegistrationDTO query);
+        Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto);
+        void UpdateUser(UserDetailDTO dto);
         UserDetailDTO GetUserByEmailAsync(string email);
     }
 }

@@ -36,6 +36,12 @@ namespace DataAccessLayer.Repositories
             return entity;
         }
 
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            await Task.Run(() => _dbContext.Entry(entity).State = EntityState.Modified);
+            return entity;
+        }
+
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

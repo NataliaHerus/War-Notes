@@ -2,7 +2,6 @@
 using BusinessLogicLayer.Services.Interfaces;
 using DataAccessLayer.EntityFramework.Entities;
 using DataAccessLayer.Repositories.Interfaces;
-using BusinessLogicLayer.Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
             _dbContext = dbContext;
         }
-        public async Task<UserRegistrationDTO> CreateUserAsync(UserRegistrationDTO dto)
+        public async Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto)
         { 
             var user = _mapper.Map<User>(dto);
             user.IsBlocked = false;
@@ -33,13 +32,20 @@ namespace BusinessLogicLayer.Services
             var newUser = await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAcync();
 
-            return _mapper.Map<UserRegistrationDTO>(newUser);
+            return _mapper.Map<UserDetailDTO>(newUser);
         }
 
         public UserDetailDTO GetUserByEmailAsync(string email)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
             return _mapper.Map<UserDetailDTO>(user); 
+        }
+
+        public void UpdateUser(UserDetailDTO dto)
+        {
+            var user = _dbContext.Users.FirstOrDefault(x => x.Id == dto.Id);
+             _mapper.Map(dto, user);
+            _userRepository.SaveChangesAcync();
         }
     }
 }
