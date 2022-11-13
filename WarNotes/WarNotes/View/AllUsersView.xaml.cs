@@ -27,21 +27,10 @@ namespace WarNotes.View
         public AllUsersView(IUserService userService, IAuthenticator authenticator)
         {
             InitializeComponent();
-            List<UserForAdminDTO> users = new List<UserForAdminDTO>();
-            users.Add(new UserForAdminDTO() {FirstName = "Анна", LastName = "Берко", Email = "berko@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Олег", LastName = "Сопко", Email = "osopko22@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марина", LastName = "Сертинюк", Email = "sert@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Павло", LastName = "Рак", Email = "pavlo@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марта", LastName = "Коваль", Email = "koval@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Анна", LastName = "Берко", Email = "berko@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Олег", LastName = "Сопко", Email = "osopko22@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марина", LastName = "Сертинюк", Email = "sert@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Павло", LastName = "Рак", Email = "pavlo@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марта", LastName = "Коваль", Email = "koval@gmail.com" });
-
-            AllUsersList.ItemsSource = users;
             _userService = userService;
             _authenticator = authenticator;
+            AllUsersList.ItemsSource = _userService.GetAllUsersListAsync();
+           
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
@@ -49,6 +38,25 @@ namespace WarNotes.View
             AdminProfileView exit = new AdminProfileView(_userService, _authenticator);
             exit.Show();
             Hide();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDetailDTO user = (UserDetailDTO)AllUsersList.SelectedValue;
+            if (user != null)
+            {
+                user.IsBlocked = true;
+                _userService.UpdateUser(user);
+            }
+        }
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UserDetailDTO user = (UserDetailDTO)AllUsersList.SelectedValue;
+            if (user != null)
+            {
+                user.IsBlocked = false;
+                _userService.UpdateUser(user);
+            }
         }
     }
 }

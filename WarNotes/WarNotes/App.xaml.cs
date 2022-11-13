@@ -36,6 +36,7 @@ namespace WarNotes
                     services.AddScoped<IAuthenticationService, AuthenticationService>();
                     services.AddScoped<IAuthenticator, Authenticator>();
                     services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+                    services.AddScoped<IUserRepository, UserRepository>();
 
                     services.AddSingleton<LoginView>();
                     
