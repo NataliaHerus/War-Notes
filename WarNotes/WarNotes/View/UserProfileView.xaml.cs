@@ -28,12 +28,12 @@ namespace WarNotes.View
         {
             InitializeComponent();
             UserDetailDTO user = new UserDetailDTO();
-            user.FirstName = "Anna";
-            user.LastName = "Koshmal";
-            user.Email = "anna@gmail.com";
             this.DataContext = user;
             _userService = userService;
             _authenticator = authenticator;
+            user.FirstName = _authenticator.CurrentAccount.FirstName;
+            user.LastName = _authenticator.CurrentAccount.LastName;
+            user.Email = _authenticator.CurrentAccount.Email;
         }
         private void exit_Click(object sender, RoutedEventArgs e)
         {
