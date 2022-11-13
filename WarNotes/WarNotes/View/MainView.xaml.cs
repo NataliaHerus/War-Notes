@@ -185,5 +185,12 @@ namespace WarNotes.View
                 this.WindowState = WindowState.Maximized;
             else this.WindowState = WindowState.Normal;
         }
+        private void LikeButton_Click(object sender, RoutedEventArgs e) 
+        {
+        }
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
     }
 }
