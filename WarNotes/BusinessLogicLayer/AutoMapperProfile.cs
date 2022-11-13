@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DataAccessLayer.EntityFramework.Entities;
-using BusinessLogicLayer.Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,6 @@ namespace BusinessLogicLayer
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserRegistrationDTO>().ReverseMap();
             CreateMap<User, UserDetailDTO>().ReverseMap();
         }
     }

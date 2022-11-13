@@ -1,11 +1,11 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.Services.Interfaces;
-using BusinessLogicLayer.Services.DTO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using BusinessLogicLayer.Validators;
 using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.DTO;
 
 namespace WarNotes.View
 {
@@ -103,7 +103,7 @@ namespace WarNotes.View
             {
                 Hasher hash = new Hasher(password);
                 string hashedPassword = hash.ComputeHash();
-                UserRegistrationDTO user = new UserRegistrationDTO();
+                UserDetailDTO user = new UserDetailDTO();
 
                 user.FirstName = firstName;
                 user.LastName = lastName;

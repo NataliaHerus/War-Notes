@@ -1,5 +1,4 @@
-﻿using BusinessLogicLayer.Services.DTO;
-using BusinessLogicLayer.Services.Interfaces;
+﻿using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
