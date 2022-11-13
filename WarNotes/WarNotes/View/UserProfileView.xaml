@@ -26,7 +26,22 @@
                                FontSize="29"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height"
+                                                         From="29" To="50"
+                                                         Duration="0:0:1"
+                                                         AutoReverse="True">
+                                            
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                     <TextBlock Text="Ім'я"
                                Foreground="Black"
                                FontSize="24"
@@ -47,8 +62,10 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="24,0,0,0"
-                             Background="Transparent">
-                    </TextBox>
+                             Background="Transparent"
+                             />
+
+
                     <TextBlock Text="Прізвище"
                                Foreground="Black"
                                FontSize="24"

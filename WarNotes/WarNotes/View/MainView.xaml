@@ -12,10 +12,7 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True">
-
-
-    
-
+   
     <Border CornerRadius="10"                    
             BorderThickness="1">
         <Border.Background>
@@ -26,9 +23,9 @@
             </LinearGradientBrush>
 
         </Border.Background>
+        
 
-
-        <Grid>
+        <Grid x:Name="GridMenu">
             <Grid.ColumnDefinitions>
                 <!--Navigation menu-->
                 <ColumnDefinition Width="250"/>
@@ -41,27 +38,30 @@
                 <Border.Background>
                     <ImageBrush ImageSource="/Images/menu.png"/>
                 </Border.Background>
-                <StackPanel>
+                <Grid>
+                    <StackPanel>
 
-                    <!--Logo-->
-                    <StackPanel Orientation="Horizontal"
+                        <!--Logo-->
+                        <StackPanel Orientation="Horizontal"
                                 Height="35"
                                 Margin="15,25,0,40">
-                        <TextBlock Text="WAR NOTES"
+                            <TextBlock Text="WAR NOTES"
                                    Foreground="#24105F"
                                    FontSize="20"
                                    FontFamily="Montserrat"
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                        <!--Menu Buttons-->
+                        <StackPanel x:Name="categories">
+
+
+                        </StackPanel>
                     </StackPanel>
-
-                    <!--Menu Buttons-->
-                    <StackPanel x:Name="categories">
-
-
-                    </StackPanel>
-                </StackPanel>
+                </Grid>
+               
             </Border>
 
             <!--Main Section-->
@@ -142,6 +142,68 @@
                             </Button.Template>
                         </Button>
                     </StackPanel>
+                    <Button x:Name="LikeButton"
+                            Width="50" Height="50"
+                            BorderThickness="0"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Margin="0,0,0,0"
+                            Click="LikeButton_Click">
+                        <Image Source="/Images/like.png" Height="23" Width="23"/>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#BF80FF"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Pink"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="40" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="SaveButton"
+                            Width="50" Height="50"
+                            BorderThickness="0"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Margin="0,0,200,0"
+                            Click="SaveButton_Click">
+                        <Image Source="/Images/buttonSave.png" Height="23" Width="23"/>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#BF80FF"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Pink"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="40" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+
                     <StackPanel x:Name="headers" Grid.Row="2" Margin="25">
 
                     </StackPanel>

@@ -119,7 +119,9 @@
                                FontSize="25"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center">
+                        
+                    </TextBlock>
                     <TextBlock Text="Довідник для людей, що стикнулися з війною."
                                Foreground="LightGray"
                                FontSize="12"
@@ -194,14 +196,16 @@
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
+                            
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="150" Height="40"
+                                <Border x:Name="Border" Width="150" Height="40"
                                         CornerRadius="20"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
+
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
