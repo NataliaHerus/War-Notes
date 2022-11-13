@@ -2,44 +2,56 @@
 using BusinessLogicLayer.Services.Interfaces;
 using DataAccessLayer.EntityFramework.Entities;
 using DataAccessLayer.Repositories.Interfaces;
-using BusinessLogicLayer.Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.EntityFramework;
+using BusinessLogicLayer.DTO;
 
 namespace BusinessLogicLayer.Services
 {
     public class UserService : IUserService
     {
         protected readonly WarNotesContext _dbContext;
-        protected readonly IRepository<User> _userRepository;
+        protected readonly IUserRepository _userRepository;
         protected readonly IMapper _mapper;
 
-        public UserService(IRepository<User> userRepository, IMapper mapper, WarNotesContext dbContext)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _dbContext = dbContext;
         }
-        public async Task<UserRegistrationDTO> CreateUserAsync(UserRegistrationDTO dto)
+        public async Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto)
         { 
             var user = _mapper.Map<User>(dto);
             user.IsBlocked = false;
             user.Role = 1;
-            var newUser = await _userRepository.AddAsync(user);
+            var newUser = await _userRepository.CreateUserAsync(user);
             await _userRepository.SaveChangesAcync();
 
-            return _mapper.Map<UserRegistrationDTO>(newUser);
+            return _mapper.Map<UserDetailDTO>(newUser);
         }
 
-        public UserRegistrationDTO GetUserByEmailAsync(string email)
+        public UserDetailDTO GetUserByEmailAsync(string email)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.Email == email);
+            var user = _userRepository.GetUserByEmailAsync(email);
+            return _mapper.Map<UserDetailDTO>(user); 
+        }
 
-            return _mapper.Map<UserRegistrationDTO>(user); 
+        public void UpdateUser(UserDetailDTO dto)
+        {
+            var user = _userRepository.GetUserById(dto.Id);
+            _userRepository.UpdateUser(user);
+             _mapper.Map(dto, user);
+            _userRepository.SaveChangesAcync();
+        }
+
+        public List<UserDetailDTO> GetAllUsersListAsync()
+        {
+            var users = _userRepository.GetAllUsersListAsync();
+            return _mapper.Map<List<UserDetailDTO>>(users);
         }
     }
 }

@@ -39,12 +39,14 @@
                                 <TextBox Text="Ім'я" Grid.Column="0"></TextBox>
                                 <TextBox Text="Прізвище" Grid.Column="1"></TextBox>
                                 <TextBox Text="Email" Grid.Column="2"></TextBox>
-                                <CheckBox IsChecked="False"
+                                <CheckBox IsChecked ="{Binding IsBlocked}"
+                                          x:Name="checkBox"
                                           Content="Заблокований"
                                           FontSize="12"
                                           FontWeight="Bold"
                                           HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"                          
+                                          VerticalAlignment="Center" 
+                                          Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"
                                           Grid.Column="3">
                                 </CheckBox>
                                     <TextBlock Grid.Column="0" Text="{Binding FirstName}"

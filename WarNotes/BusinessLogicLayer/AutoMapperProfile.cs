@@ -12,6 +12,7 @@ namespace BusinessLogicLayer
             CreateMap<User, UserRegistrationDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<Article, ArticleDTO>().ReverseMap();
+            CreateMap<User, UserDetailDTO>().ReverseMap();
         }
     }
 }

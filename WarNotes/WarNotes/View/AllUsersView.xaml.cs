@@ -1,18 +1,7 @@
-﻿using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.DTO;
 using BusinessLogicLayer.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WarNotes.View
 {
@@ -20,33 +9,49 @@ namespace WarNotes.View
     {
         private readonly ICategoryService _categoryService;
         private readonly IArticleService _articleService;
+        private readonly IUserService _userService;
+        private readonly IAuthenticator _authenticator;
 
-        public AllUsersView(ICategoryService categoryService, IArticleService articleService)
+        public AllUsersView(
+            ICategoryService categoryService,
+            IArticleService articleService,
+            IUserService userService,
+            IAuthenticator authenticator)
         {
             InitializeComponent();
             _categoryService = categoryService;
             _articleService = articleService;
+            _userService = userService;
+            _authenticator = authenticator;
 
-            List<UserForAdminDTO> users = new List<UserForAdminDTO>();
-            users.Add(new UserForAdminDTO() {FirstName = "Анна", LastName = "Берко", Email = "berko@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Олег", LastName = "Сопко", Email = "osopko22@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марина", LastName = "Сертинюк", Email = "sert@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Павло", LastName = "Рак", Email = "pavlo@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марта", LastName = "Коваль", Email = "koval@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Анна", LastName = "Берко", Email = "berko@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Олег", LastName = "Сопко", Email = "osopko22@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марина", LastName = "Сертинюк", Email = "sert@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Павло", LastName = "Рак", Email = "pavlo@gmail.com" });
-            users.Add(new UserForAdminDTO() { FirstName = "Марта", LastName = "Коваль", Email = "koval@gmail.com" });
-
-            AllUsersList.ItemsSource = users;
+            AllUsersList.ItemsSource = _userService.GetAllUsersListAsync();
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            AdminProfileView exit = new AdminProfileView(_categoryService, _articleService);
+            AdminProfileView exit = new AdminProfileView(_categoryService, _articleService, _userService, _authenticator);
+
             exit.Show();
             Hide();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDetailDTO user = (UserDetailDTO)AllUsersList.SelectedValue;
+            if (user != null)
+            {
+                user.IsBlocked = true;
+                _userService.UpdateUser(user);
+            }
+        }
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UserDetailDTO user = (UserDetailDTO)AllUsersList.SelectedValue;
+            if (user != null)
+            {
+                user.IsBlocked = false;
+                _userService.UpdateUser(user);
+            }
         }
     }
 }

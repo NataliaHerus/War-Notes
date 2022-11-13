@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services.Interfaces
 {
-    public interface IUserService
+    public interface IAuthenticationService
     {
-        Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto);
-        void UpdateUser(UserDetailDTO dto);
-        UserDetailDTO GetUserByEmailAsync(string email);
-        List<UserDetailDTO> GetAllUsersListAsync();
+        UserDetailDTO Login(string email, string password);
+        UserDetailDTO? CurrentAccount { get; set; }
+        bool IsLoggedIn();
+
+        void Logout();
     }
 }

@@ -1,6 +1,5 @@
-﻿using BusinessLogicLayer.DTO;
+using BusinessLogicLayer.Authentication;
 using BusinessLogicLayer.Services.Interfaces;
-using System.Collections.Generic;
 using System.Windows;
 
 namespace WarNotes.View
@@ -9,41 +8,28 @@ namespace WarNotes.View
     {
         private readonly ICategoryService _categoryService;
         private readonly IArticleService _articleService;
+        private readonly IUserService _userService;
+        private readonly IAuthenticator _authenticator;
 
-        public LikedArticlesView(ICategoryService categoryService, IArticleService articleService)
+        public LikedArticlesView(
+            ICategoryService categoryService,
+            IArticleService articleService,
+            IUserService userService,
+            IAuthenticator authenticator)
         {
             InitializeComponent();
             _categoryService = categoryService;
             _articleService = articleService;
-
-            List<ArticleDTO> items = new List<ArticleDTO>();
-            items.Add(new ArticleDTO() { Title = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa?" });
-            items.Add(new ArticleDTO() { Title = "Стаття 234" });
-            items.Add(new ArticleDTO() { Title = "Що робити?" });
-            items.Add(new ArticleDTO() { Title = "Що має бути  ситуацій?" });
-            items.Add(new ArticleDTO() { Title = "vvvvvvvvvvvvvvvvvvvvvvvvvvvv" });
-            items.Add(new ArticleDTO() { Title = "Що має боівлівоілво их ситуацій?" });
-            items.Add(new ArticleDTO() { Title = "Що має бути в аптечці для надзвичайних ситуацій?" });
-            items.Add(new ArticleDTO() { Title = "fddddddddddddddddddddddd" });
-            items.Add(new ArticleDTO() { Title = "Що має бутив вівілвсілвоілс бво" });
-            items.Add(new ArticleDTO() { Title = "ілвіловілволллллллллл" });
-            items.Add(new ArticleDTO() { Title = "Що має бути в аптечці для надзвичайних ситуацій?" });
-            items.Add(new ArticleDTO() { Title = "Що має бути олявілвоілвоілволв?" });
-            items.Add(new ArticleDTO() { Title = "Що має бути в аптечці для надзвичайних ситуацій?" });
-
-            LikedArticlesList.ItemsSource = items;
-
+            _userService = userService;
+            _authenticator = authenticator;
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile(_categoryService, _articleService);
+            UserProfile backToProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
+
             backToProfile.Show();
             Hide();
         }
-
-
-
-
     }
 }

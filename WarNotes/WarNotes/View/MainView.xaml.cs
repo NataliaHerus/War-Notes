@@ -1,6 +1,9 @@
-﻿using BusinessLogicLayer.Services.Interfaces;
 using System;
 using System.Windows.Controls;
+﻿using BusinessLogicLayer.Authentication;
+using BusinessLogicLayer.Enums;
+using BusinessLogicLayer.Services.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -20,13 +23,21 @@ namespace WarNotes.View
     {
         private readonly ICategoryService _categoryService;
         private readonly IArticleService _articleService;
+        private readonly IUserService _userService;
+        private readonly IAuthenticator _authenticator;
 
         public int SelectedCategoryId { get; set; }
 
-        public MainView(ICategoryService categoryService, IArticleService articleService)
+        public MainView(
+            ICategoryService categoryService,
+            IArticleService articleService,
+            IUserService userService,
+            IAuthenticator authenticator)
         {
             _categoryService = categoryService;
             _articleService = articleService;
+            _userService = userService;
+            _authenticator = authenticator;
 
             InitializeComponent();
             LoadCategories();
@@ -244,16 +255,26 @@ namespace WarNotes.View
         }
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            //if role == user
-            UserProfile userProfile = new UserProfile(_categoryService, _articleService);
-            userProfile.Show();
+            if (_authenticator.CurrentAccount.Role is Role.User)
+            {
+                UserProfile userProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
+                userProfile.Show();
+                Hide();
+            }
+
+            if (_authenticator.CurrentAccount.Role is Role.Admin)
+            {
+                AdminProfileView adminProfile = new AdminProfileView(_categoryService, _articleService, _userService, _authenticator);
+                adminProfile.Show();
+                Hide();
+            }
+        }
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView loginView = new LoginView(_userService, _categoryService, _articleService, _authenticator);
+            _authenticator.Logout();
+            loginView.Show();
             Hide();
-
-
-            //if role == admin
-            /*AdminProfileView adminProfile = new AdminProfileView();
-            adminProfile.Show();
-            Hide();*/
         }
 
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
@@ -262,12 +283,5 @@ namespace WarNotes.View
                 this.WindowState = WindowState.Maximized;
             else this.WindowState = WindowState.Normal;
         }
-        private void LikeButton_Click(object sender, RoutedEventArgs e) 
-        {
-        }
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
     }
 }
