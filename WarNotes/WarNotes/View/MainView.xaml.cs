@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Media;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace WarNotes.View
 {
@@ -106,7 +107,7 @@ namespace WarNotes.View
             foreach(var block in blocksOfText)
             {
                 var text = block;
-                if (block.Contains("photo"))
+                if (text.Contains("photo"))
                 {
                     int pFrom = block.IndexOf("photo");
                     int pTo = block.LastIndexOf(".png") + ".png".Length;
@@ -124,6 +125,25 @@ namespace WarNotes.View
                     articleBlock.Children.Add(img);
                 }
 
+                var soundButtons = new List<Button>();
+                if (text.Contains("(SOUND:"))
+                {
+                    var innerBlocks = text.Split("(SOUND:");
+                    for (int i = 1; i < innerBlocks.Length; i++)
+                    {
+                        int pFrom = 0;
+                        int pTo = innerBlocks[i].LastIndexOf(".wav") + ".wav".Length;
+
+                        var soundName = innerBlocks[i].Substring(pFrom, pTo - pFrom);
+                        text = text.Replace("(SOUND:" + soundName + ")", "");
+
+                        var soundBtn = new Button() { Content = soundName.Replace(".wav", "") };
+                        soundBtn.Click += SoundPlay;
+                        soundBtn.Style = (Style)FindResource("soundButton");
+                        soundButtons.Add(soundBtn);
+                    }
+                }
+
                 var myFlowDoc = new FlowDocument();
                 myFlowDoc.Blocks.Add(new Paragraph(new Run(text)));
 
@@ -134,15 +154,20 @@ namespace WarNotes.View
                 myRichTextBox.Document = myFlowDoc;
 
                 articleBlock.Children.Add(myRichTextBox);
-            }
 
-            Button btnTest = new Button() { Content = "Кнопка" };
-            btnTest.Click += SoundPlay;
+                foreach (var sound in soundButtons)
+                    articleBlock.Children.Add(sound);
+            }
         }
 
         private void SoundPlay(object sender, RoutedEventArgs e)
         {
-            SoundPlayer player = new SoundPlayer(@"test.wav");
+            var btnSender = (Button)sender;
+            var soundName = btnSender.Content;
+
+            var path = $"../../../Sounds/{soundName}.wav";
+            var player = new SoundPlayer(path);
+
             player.Play();
         }
 

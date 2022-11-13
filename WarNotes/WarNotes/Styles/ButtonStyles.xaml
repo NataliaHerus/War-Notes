@@ -189,4 +189,37 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!-- Sound Button -->
+    <Style x:Key="soundButton" TargetType="Button">
+        <!--Normal button style-->
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="-5,0,0,5"/>
+        <Setter Property="Background" Value="#d2ccff"/>
+        <Setter Property="Foreground" Value="black"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="MaxWidth" Value="320"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="6,0,0,0"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!--Button Style on hover-->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="MaxWidth" Value="340"/>
+                <Setter Property="Margin" Value="0,0,0,5"/>
+                <Setter Property="Background" Value="#B266FF"/>
+                <Setter Property="Foreground" Value="{StaticResource titleColor3}"/>
+                <Setter Property="BorderBrush" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

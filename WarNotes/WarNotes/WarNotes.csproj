@@ -40,7 +40,50 @@
     <None Remove="Images\menu.png" />
     <None Remove="Images\pngwinguser.png" />
     <None Remove="Images\user.png" />
-    <None Remove="Sounds\test.ogg" />
+    <None Remove="Sounds\chymical danger.wav" />
+    <None Remove="Sounds\test.wav" />
+    <None Remove="Sounds\Вуличні бої.wav" />
+    <None Remove="Sounds\Загроза артобстрілу.wav" />
+    <None Remove="Sounds\Запуск і виліт ракети.wav" />
+    <None Remove="Sounds\Звук ракети що летить.wav" />
+    <None Remove="Sounds\Звук ракети що приближається.wav" />
+    <None Remove="Sounds\Повітряна тривога.wav" />
+    <None Remove="Sounds\Радіаційна небезпека.wav" />
+    <None Remove="Sounds\Хімічна небезпека - Copy.wav" />
+    <None Remove="Sounds\Хімічна небезпека.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sounds\test.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Вуличні бої.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Загроза артобстрілу.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Запуск і виліт ракети.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Звук ракети що летить.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Звук ракети що приближається.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Повітряна тривога.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Радіаційна небезпека.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\chymical danger.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Хімічна небезпека.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -86,9 +129,10 @@
     <Resource Include="Images\Materials\Category5\photo3.png" />
     <Resource Include="Images\menu.png" />
     <Resource Include="Images\user.png" />
-    <Resource Include="Sounds\test.ogg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
