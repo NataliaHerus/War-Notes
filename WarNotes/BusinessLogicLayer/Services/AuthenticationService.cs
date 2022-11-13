@@ -26,11 +26,15 @@ namespace BusinessLogicLayer.Services
 
         public UserDetailDTO Login(string email, string password)
         {
-            UserDetailDTO storedAccount = _userService.GetUserByEmailAsync(email);
+            UserDetailDTO storedAccount = _userService.GetUserByEmail(email);
 
             if (storedAccount == null)
             {
                 throw new UserNotFoundException("Користувача з вказаною поштою не існує", email);
+            }
+            if (storedAccount.IsBlocked)
+            {
+                throw new UserNotFoundException("Користувач заблокований", email);
             }
 
             Hasher storedHash = new Hasher(password);

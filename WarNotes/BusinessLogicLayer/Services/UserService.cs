@@ -34,7 +34,7 @@ namespace BusinessLogicLayer.Services
             return _mapper.Map<UserDetailDTO>(newUser);
         }
 
-        public UserDetailDTO GetUserByEmailAsync(string email)
+        public UserDetailDTO GetUserByEmail(string email)
         {
             var user = _userRepository.GetUserByEmailAsync(email);
             return _mapper.Map<UserDetailDTO>(user); 
@@ -48,10 +48,16 @@ namespace BusinessLogicLayer.Services
             _userRepository.SaveChangesAcync();
         }
 
-        public List<UserDetailDTO> GetAllUsersListAsync()
+        public List<UserDetailDTO> GetAllUsersList()
         {
             var users = _userRepository.GetAllUsersListAsync();
             return _mapper.Map<List<UserDetailDTO>>(users);
+        }
+
+        public UserDetailDTO GetUserById(int id)
+        {
+            var user = _userRepository.GetUserById(id);
+            return _mapper.Map<UserDetailDTO>(user);
         }
     }
 }

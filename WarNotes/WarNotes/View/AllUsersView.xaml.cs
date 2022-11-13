@@ -29,7 +29,7 @@ namespace WarNotes.View
             InitializeComponent();
             _userService = userService;
             _authenticator = authenticator;
-            AllUsersList.ItemsSource = _userService.GetAllUsersListAsync();
+            AllUsersList.ItemsSource = _userService.GetAllUsersList();
            
         }
 
@@ -47,6 +47,7 @@ namespace WarNotes.View
             {
                 user.IsBlocked = true;
                 _userService.UpdateUser(user);
+                MessageBox.Show("Користувача заблоковано. Вхід в систему обмежено");
             }
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -56,6 +57,7 @@ namespace WarNotes.View
             {
                 user.IsBlocked = false;
                 _userService.UpdateUser(user);
+                MessageBox.Show("Користувача розблоковано. Тепер він може увійти в систему");
             }
         }
     }
