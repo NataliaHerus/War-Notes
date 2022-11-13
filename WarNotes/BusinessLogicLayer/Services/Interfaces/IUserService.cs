@@ -12,7 +12,8 @@ namespace BusinessLogicLayer.Services.Interfaces
     {
         Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto);
         void UpdateUser(UserDetailDTO dto);
-        UserDetailDTO GetUserByEmailAsync(string email);
-        List<UserDetailDTO> GetAllUsersListAsync();
+        UserDetailDTO GetUserByEmail(string email);
+        UserDetailDTO GetUserById(int id);
+        List<UserDetailDTO> GetAllUsersList();
     }
 }

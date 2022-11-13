@@ -102,7 +102,7 @@ namespace WarNotes.View
             {
                 txtMail.Background = Brushes.Transparent;
             }
-            if (_userService.GetUserByEmailAsync(email) is not null)
+            if (_userService.GetUserByEmail(email) is not null)
             {
                 MessageBox.Show("Користувач з такою адресою вже існує. Будь ласка, замініть на іншу");
             }
