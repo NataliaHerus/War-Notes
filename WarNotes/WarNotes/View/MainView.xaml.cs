@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Media;
+using System.Text.RegularExpressions;
 
 namespace WarNotes.View
 {
@@ -89,32 +91,59 @@ namespace WarNotes.View
         private void LoadArticle(string articleHeader)
         {
             articleBlock.Children.Clear();
+            headers.Visibility = Visibility.Hidden;
             scrollerBlock.Visibility = Visibility.Visible;
 
-            headers.Children.Clear();
-            headers.Visibility = Visibility.Hidden;
+            var title = new Label() { Content = articleHeader, FontSize = 23, HorizontalAlignment = HorizontalAlignment.Center };
+            articleBlock.Children.Add(title);
 
             var article = _articleService.GetArticleByTitle(articleHeader, SelectedCategoryId);
+            article.Text = article.Text.Replace(@"\n", "\n");
+            article.Text = article.Text.Replace(@"\t", "\t");
 
-            FlowDocument myFlowDoc = new FlowDocument();
+            var blocksOfText = article.Text.Split("(ФОТО:");
 
-            myFlowDoc.Blocks.Add(new Paragraph(new Run(article.Text)));
-            
-            RichTextBox myRichTextBox = new RichTextBox() { IsReadOnly = true, FontSize = 16 };
-            myRichTextBox.Background = Brushes.Transparent;
-            myRichTextBox.BorderBrush = Brushes.Transparent;
-
-            myRichTextBox.Document = myFlowDoc;
-
-            var test = new Image()
+            foreach(var block in blocksOfText)
             {
-                Width = 400,
-                Height = 300,
-                Source = new BitmapImage(new Uri(@"../Images/Materials/test3.png", UriKind.RelativeOrAbsolute))
-            };
+                var text = block;
+                if (block.Contains("photo"))
+                {
+                    int pFrom = block.IndexOf("photo");
+                    int pTo = block.LastIndexOf(".png") + ".png".Length;
 
-            articleBlock.Children.Add(myRichTextBox);
-            articleBlock.Children.Add(test);
+                    var photoName = block.Substring(pFrom, pTo - pFrom);
+                    text = text.Replace(photoName + ")", "");
+
+                    var img = new Image()
+                    {
+                        Width = 400,
+                        Height = 300,
+                        Source = new BitmapImage(new Uri($"../Images/Materials/Category{article.CategoryId}/{photoName}", UriKind.RelativeOrAbsolute))
+                    };
+
+                    articleBlock.Children.Add(img);
+                }
+
+                var myFlowDoc = new FlowDocument();
+                myFlowDoc.Blocks.Add(new Paragraph(new Run(text)));
+
+                var myRichTextBox = new RichTextBox() { IsReadOnly = true, FontSize = 16 };
+                myRichTextBox.Background = Brushes.Transparent;
+                myRichTextBox.BorderBrush = Brushes.Transparent;
+
+                myRichTextBox.Document = myFlowDoc;
+
+                articleBlock.Children.Add(myRichTextBox);
+            }
+
+            Button btnTest = new Button() { Content = "Кнопка" };
+            btnTest.Click += SoundPlay;
+        }
+
+        private void SoundPlay(object sender, RoutedEventArgs e)
+        {
+            SoundPlayer player = new SoundPlayer(@"test.wav");
+            player.Play();
         }
 
         [DllImport("user32.dll")]
