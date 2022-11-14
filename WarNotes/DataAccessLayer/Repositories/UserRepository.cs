@@ -28,19 +28,19 @@ namespace DataAccessLayer.Repositories
             return _dbContext.Users!.ToList();
         }
 
-        public User GetUserByEmailAsync(string email)
+        public User? GetUserByEmailAsync(string? email)
         {
-            return _dbContext.Users.FirstOrDefault(x => x.Email == email);
+            return _dbContext.Users!.FirstOrDefault(x => x.Email == email);
         }
 
-        public User GetUserById(int id)
+        public User? GetUserById(int id)
         {
-            return _dbContext.Users.FirstOrDefault(x => x.Id == id);
+            return _dbContext.Users!.FirstOrDefault(x => x.Id == id);
         }
 
-        public User UpdateUser(User user)
+        public User? UpdateUser(User? user)
         {
-            _dbContext.Entry(user).State = EntityState.Modified;
+            _dbContext.Entry(user!).State = EntityState.Modified;
             return user;
         }
 

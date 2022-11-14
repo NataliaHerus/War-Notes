@@ -30,7 +30,7 @@ namespace WarNotes.View
 
             UserDetailDto user = new UserDetailDto();
             this.DataContext = user;
-            user.FirstName = _authenticator.CurrentAccount.FirstName;
+            user.FirstName = _authenticator.CurrentAccount!.FirstName;
             user.LastName = _authenticator.CurrentAccount.LastName;
             user.Email = _authenticator.CurrentAccount.Email;
         }
@@ -45,28 +45,28 @@ namespace WarNotes.View
 
         private void openLiked_Click(object sender, RoutedEventArgs e)
         {
-            LikedArticlesView openLiked = new LikedArticlesView(_categoryService, _articleService, _userService, _authenticator);
+            LikedArticlesView open = new LikedArticlesView(_categoryService, _articleService, _userService, _authenticator);
 
-            openLiked.Show();
+            open.Show();
             Hide();
         }
         private void openSaved_Click(object sender, RoutedEventArgs e)
         {
-            SavedArticlesView openSaved = new SavedArticlesView(_categoryService, _articleService, _userService, _authenticator);
+            SavedArticlesView open = new SavedArticlesView(_categoryService, _articleService, _userService, _authenticator);
 
-            openSaved.Show();
+            open.Show();
             Hide();
         }
         private void update_Click(object sender, RoutedEventArgs e)
         {
-            UpdateView update = new UpdateView(_categoryService, _articleService, _userService, _authenticator);
+            UpdateView refresh = new UpdateView(_categoryService, _articleService, _userService, _authenticator);
 
-            update.Show();
+            refresh.Show();
             Hide();
         }
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        internal static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

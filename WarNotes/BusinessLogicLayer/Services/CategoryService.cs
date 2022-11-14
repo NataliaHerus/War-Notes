@@ -25,10 +25,10 @@ namespace BusinessLogicLayer.Services
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
 
-        public async Task<string> GetCategoryNameById(int id)
+        public async Task<string?> GetCategoryNameById(int id)
         {
             var category = await _categoryrepository.GetByIdAsync(id);
-            return category.CategoryName;
+            return category!.CategoryName;
         }
     }
 }

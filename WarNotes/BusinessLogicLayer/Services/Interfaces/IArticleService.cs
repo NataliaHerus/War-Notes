@@ -5,9 +5,9 @@ namespace BusinessLogicLayer.Services.Interfaces
 {
     public interface IArticleService
     {
-        IEnumerable<string> GetArticleHeadersByCategoryName(string categoryName);
+        IEnumerable<string?> GetArticleHeadersByCategoryName(string categoryName);
         ArticleDto GetArticleByTitle(string title, int categoryId);
-        string GetArticleTitleById(int id);
+        string? GetArticleTitleById(int id);
 
         bool ArticleIsLikedByUserId(int userId, int articleId);
         bool ArticleIsSavedByUserId(int userId, int articleId);

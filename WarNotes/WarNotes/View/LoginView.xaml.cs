@@ -53,7 +53,7 @@ namespace WarNotes.View
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string password = txtPass.Password.Trim();
-            Hasher hash = new Hasher(password);
+            Hasher hash = new (password);
             string hashedPassword = hash.ComputeHash();
 
             try
@@ -66,7 +66,7 @@ namespace WarNotes.View
             }
             if (_authenticator.IsLoggedIn)
             {
-                MainView registerView = new MainView(_categoryService, _articleService, _userService, _authenticator);
+                MainView registerView = new (_categoryService, _articleService, _userService, _authenticator);
                 registerView.Show();
                 Hide();
             }
@@ -74,7 +74,7 @@ namespace WarNotes.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterView registerView = new RegisterView(_userService, _categoryService, _articleService, _authenticator);
+            RegisterView registerView = new (_userService, _categoryService, _articleService, _authenticator);
 
             registerView.Show();
             Hide();

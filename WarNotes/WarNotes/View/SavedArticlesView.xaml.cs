@@ -26,7 +26,7 @@ namespace WarNotes.View
             _articleService = articleService;
             _userService = userService;
             _authenticator = authenticator;
-            SavedArticlesList.ItemsSource = _articleService.GetSavedArticlesByUserId(_authenticator.CurrentAccount.Id);
+            SavedArticlesList.ItemsSource = _articleService.GetSavedArticlesByUserId(_authenticator.CurrentAccount!.Id);
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
@@ -37,7 +37,7 @@ namespace WarNotes.View
             Hide();
         }
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        internal static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

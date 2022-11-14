@@ -26,7 +26,7 @@ namespace DataAccessLayer.Repositories
             return entity;
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }

@@ -6,8 +6,8 @@ namespace DataAccessLayer.Repositories.Interfaces
 {
     public interface IArticleRepository : IRepository<Article>
     {
-        IEnumerable<string> GetArticleHeadersByCategoryName(string categoryName);
-        string GetArticleTitleById(int id);
+        IEnumerable<string?> GetArticleHeadersByCategoryName(string? categoryName);
+        string? GetArticleTitleById(int id);
         Article GetArticleByTitle(string title, int categoryId);
 
         bool ArticleIsLikedByUserId(int userId, int articleId);
@@ -18,8 +18,8 @@ namespace DataAccessLayer.Repositories.Interfaces
 
         void DeleteLikedArticle(int userId, int articleId);
         void DeleteSavedArticle(int userId, int articleId);
-        IEnumerable<Article> GetLikedArticlesByUserId(int userId);
-        IEnumerable<Article> GetSavedArticlesByUserId(int userId);
+        IEnumerable<Article?> GetLikedArticlesByUserId(int userId);
+        IEnumerable<Article?> GetSavedArticlesByUserId(int userId);
 
         int GetCountOfLikes(int articleId);
         int GetCountOfSaves(int articleId);

@@ -17,12 +17,12 @@ namespace BusinessLogicLayer.Services
             _articleRepository = articleRepository;
         }
 
-        public IEnumerable<string> GetArticleHeadersByCategoryName(string categoryName)
+        public IEnumerable<string?> GetArticleHeadersByCategoryName(string categoryName)
         {
             return _articleRepository.GetArticleHeadersByCategoryName(categoryName);
         }
 
-        public string GetArticleTitleById(int id)
+        public string? GetArticleTitleById(int id)
         {
             return _articleRepository.GetArticleTitleById(id);
         }

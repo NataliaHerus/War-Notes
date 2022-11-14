@@ -13,41 +13,41 @@ namespace DataAccessLayer.Repositories
         {
         }
 
-        public IEnumerable<string> GetArticleHeadersByCategoryName(string categoryName)
+        public IEnumerable<string?> GetArticleHeadersByCategoryName(string? categoryName)
         {
             return _dbContext
-                .Articles
+                .Articles!
                 .Include(a => a.Category)
-                .Where(a => a.Category.CategoryName == categoryName)
+                .Where(a => a.Category!.CategoryName == categoryName)
                 .Select(a => a.Title);
         }
 
-        public string GetArticleTitleById(int id)
+        public string? GetArticleTitleById(int id)
         {
             return _dbContext
-                .Articles
-                .First(a => a.Id == id)
+                .Articles!
+                .First(a => a.Id! == id)
                 .Title;
         }
 
         public Article GetArticleByTitle(string title, int categoryId)
         {
             return _dbContext
-                .Articles
+                .Articles!
                 .First(a => a.CategoryId == categoryId && a.Title == title);
         }
 
         public bool ArticleIsLikedByUserId(int userId, int articleId)
         {
             return _dbContext
-                .LikedArticles
+                .LikedArticles!
                 .FirstOrDefault(a => a.UserId == userId && a.ArticleId == articleId) != null;
         }
 
         public bool ArticleIsSavedByUserId(int userId, int articleId)
         {
             return _dbContext
-                .SavedArticles
+                .SavedArticles!
                 .FirstOrDefault(a => a.UserId == userId && a.ArticleId == articleId) != null;
         }
 
@@ -59,7 +59,7 @@ namespace DataAccessLayer.Repositories
                 ArticleId = articleId
             };
 
-            _dbContext.LikedArticles.Add(lickedArticle);
+            _dbContext.LikedArticles!.Add(lickedArticle);
             _dbContext.SaveChanges();
         }
 
@@ -71,49 +71,49 @@ namespace DataAccessLayer.Repositories
                 ArticleId = articleId
             };
 
-            _dbContext.SavedArticles.Add(savedArticle);
+            _dbContext.SavedArticles!.Add(savedArticle);
             _dbContext.SaveChanges();
         }
 
         public void DeleteLikedArticle(int userId, int articleId)
         {
-            LikedArticle likedArticle = _dbContext.LikedArticles.First(a => a.UserId == userId && a.ArticleId == articleId);
-            _dbContext.LikedArticles.Remove(likedArticle);
+            LikedArticle likedArticle = _dbContext.LikedArticles!.First(a => a.UserId == userId && a.ArticleId == articleId);
+            _dbContext.LikedArticles!.Remove(likedArticle);
             _dbContext.SaveChanges();
         }
 
         public void DeleteSavedArticle(int userId, int articleId)
         {
-            SavedArticle savedArticle = _dbContext.SavedArticles.First(a => a.UserId == userId && a.ArticleId == articleId);
-            _dbContext.SavedArticles.Remove(savedArticle);
+            SavedArticle savedArticle = _dbContext.SavedArticles!.First(a => a.UserId == userId && a.ArticleId == articleId);
+            _dbContext.SavedArticles!.Remove(savedArticle);
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Article> GetLikedArticlesByUserId(int userId)
+        public IEnumerable<Article?> GetLikedArticlesByUserId(int userId)
         {
             return _dbContext
-                .LikedArticles
+                .LikedArticles!
                 .Where(a => a.UserId == userId).Select(b => b.Article).ToList();
         }
 
-        public IEnumerable<Article> GetSavedArticlesByUserId(int userId)
+        public IEnumerable<Article?> GetSavedArticlesByUserId(int userId)
         {
             return _dbContext
-               .SavedArticles
+               .SavedArticles!
                .Where(a => a.UserId == userId).Select(b => b.Article).ToList();
         }
 
         public int GetCountOfLikes(int articleId)
         {
             return _dbContext
-                .LikedArticles
+                .LikedArticles!
                 .Count(a => a.ArticleId == articleId);
         }
 
         public int GetCountOfSaves(int articleId)
         {
             return _dbContext
-                .SavedArticles
+                .SavedArticles!
                 .Count(a => a.ArticleId == articleId);
         }
     }

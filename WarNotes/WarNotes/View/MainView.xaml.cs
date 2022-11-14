@@ -106,7 +106,7 @@ namespace WarNotes.View
             articleBlock.Children.Add(title);
 
             var article = _articleService.GetArticleByTitle(articleHeader, SelectedCategoryId);
-            article.Text = article.Text.Replace(@"\n", "\n");
+            article.Text = article.Text!.Replace(@"\n", "\n");
             article.Text = article.Text.Replace(@"\t", "\t");
 
             SelectedArticleId = article.Id;
@@ -269,7 +269,7 @@ namespace WarNotes.View
                 _articleService.AddLikedArticle(userId, SelectedArticleId);
 
             var articleHeader = _articleService.GetArticleTitleById(SelectedArticleId);
-            LoadArticle(articleHeader);
+            LoadArticle(articleHeader!);
         }
 
         private void SaveClicked(object sender, RoutedEventArgs e)
@@ -282,7 +282,7 @@ namespace WarNotes.View
                 _articleService.AddSavedArticle(userId, SelectedArticleId);
 
             var articleHeader = _articleService.GetArticleTitleById(SelectedArticleId);
-            LoadArticle(articleHeader);
+            LoadArticle(articleHeader!);
         }
 
         private async void BackClicked(object sender, RoutedEventArgs e)
@@ -292,15 +292,15 @@ namespace WarNotes.View
             scrollerBlock.Visibility = Visibility.Hidden;
 
             var categoryName = await _categoryService.GetCategoryNameById(SelectedCategoryId);
-            LoadHeaders(categoryName);
+            LoadHeaders(categoryName!);
         }
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        internal static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
         
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowInteropHelper helper = new WindowInteropHelper(this);
+            WindowInteropHelper helper = new (this);
             SendMessage(helper.Handle, 161, 2, 0);
         }
         
@@ -323,14 +323,14 @@ namespace WarNotes.View
         {
             if (_authenticator.CurrentAccount!.Role is Role.User)
             {
-                UserProfile userProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
+                UserProfile userProfile = new (_categoryService, _articleService, _userService, _authenticator);
                 userProfile.Show();
                 Hide();
             }
 
             if (_authenticator.CurrentAccount.Role is Role.Admin)
             {
-                AdminProfileView adminProfile = new AdminProfileView(_categoryService, _articleService, _userService, _authenticator);
+                AdminProfileView adminProfile = new (_categoryService, _articleService, _userService, _authenticator);
                 adminProfile.Show();
                 Hide();
             }
@@ -338,7 +338,7 @@ namespace WarNotes.View
         
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView(_userService, _categoryService, _articleService, _authenticator);
+            LoginView loginView = new (_userService, _categoryService, _articleService, _authenticator);
             _authenticator.Logout();
             loginView.Show();
             Hide();
