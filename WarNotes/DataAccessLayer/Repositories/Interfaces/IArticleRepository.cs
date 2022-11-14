@@ -20,5 +20,8 @@ namespace DataAccessLayer.Repositories.Interfaces
         void DeleteSavedArticle(int userId, int articleId);
         IEnumerable<Article> GetLikedArticlesByUserId(int userId);
         IEnumerable<Article> GetSavedArticlesByUserId(int userId);
+
+        int GetCountOfLikes(int articleId);
+        int GetCountOfSaves(int articleId);
     }
 }

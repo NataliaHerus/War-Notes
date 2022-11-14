@@ -125,6 +125,7 @@ namespace WarNotes.View
             }
 
             DisplayButtons();
+            DisplayStatistic();
         }
 
         private void DisplayArticle(string text)
@@ -244,6 +245,18 @@ namespace WarNotes.View
             articleBlock.Children.Add(saveButton);
 
             articleBlock.Children.Add(buttonBack);
+        }
+
+        private void DisplayStatistic()
+        {
+            int likes = _articleService.GetCountOfLikes(SelectedArticleId);
+            int saves = _articleService.GetCountOfSaves(SelectedArticleId);
+
+            var likesLabel = new Label { Content = $"Кількість вподобань: {likes}", FontSize = 17 };
+            var savesLabel = new Label { Content = $"Кількість збережень: {saves}", FontSize = 17 };
+
+            articleBlock.Children.Add(likesLabel);
+            articleBlock.Children.Add(savesLabel);
         }
 
         private void LikeClicked(object sender, RoutedEventArgs e)

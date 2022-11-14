@@ -44,13 +44,11 @@
     <None Remove="Images\save.png" />
     <None Remove="Images\savePressed.png" />
     <None Remove="Images\user.png" />
-    <None Remove="Sounds\chymical danger.wav" />
-    <None Remove="Sounds\test.wav" />
     <None Remove="Sounds\Вуличні бої.wav" />
     <None Remove="Sounds\Загроза артобстрілу.wav" />
     <None Remove="Sounds\Запуск і виліт ракети.wav" />
-    <None Remove="Sounds\Звук ракети що летить.wav" />
-    <None Remove="Sounds\Звук ракети що приближається.wav" />
+    <None Remove="Sounds\Звук ракети, що летить.wav" />
+    <None Remove="Sounds\Звук ракети, що приближається.wav" />
     <None Remove="Sounds\Повітряна тривога.wav" />
     <None Remove="Sounds\Радіаційна небезпека.wav" />
     <None Remove="Sounds\Хімічна небезпека - Copy.wav" />
@@ -58,9 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Sounds\test.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Sounds\Вуличні бої.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -70,19 +65,16 @@
     <Content Include="Sounds\Запуск і виліт ракети.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Sounds\Звук ракети що летить.wav">
+    <Content Include="Sounds\Звук ракети, що летить.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Sounds\Звук ракети що приближається.wav">
+    <Content Include="Sounds\Звук ракети, що приближається.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\Повітряна тривога.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\Радіаційна небезпека.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Sounds\chymical danger.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sounds\Хімічна небезпека.wav">
