@@ -17,5 +17,7 @@ namespace BusinessLogicLayer.Services.Interfaces
 
         void DeleteLikedArticle(int userId, int articleId);
         void DeleteSavedArticle(int userId, int articleId);
+        IEnumerable<ArticleDTO> GetLikedArticlesByUserId(int userId);
+        IEnumerable<ArticleDTO> GetSavedArticlesByUserId(int userId);
     }
 }
