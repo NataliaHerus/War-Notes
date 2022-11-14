@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Services.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync();
+        Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync();
         Task<string> GetCategoryNameById(int id);
     }
 }

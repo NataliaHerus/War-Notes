@@ -13,7 +13,7 @@ namespace WarNotes.View
 {
     public partial class UpdateView : Window
     {
-        UserDetailDTO user;
+        UserDetailDto user;
 
         private readonly ICategoryService _categoryService;
         private readonly IArticleService _articleService;
@@ -32,8 +32,8 @@ namespace WarNotes.View
             _userService = userService;
             _authenticator = authenticator;
 
-            user = new UserDetailDTO();
-            user.FirstName = _authenticator.CurrentAccount.FirstName;
+            user = new UserDetailDto();
+            user.FirstName = _authenticator.CurrentAccount!.FirstName;
             user.LastName = _authenticator.CurrentAccount.LastName;
             user.Email = _authenticator.CurrentAccount.Email;
             user.Password = _authenticator.CurrentAccount.Password;
@@ -82,7 +82,7 @@ namespace WarNotes.View
                     ShowResult.Visibility = Visibility.Visible;
                 }
             }
-            _authenticator.CurrentAccount.FirstName = user.FirstName;
+            _authenticator.CurrentAccount!.FirstName = user.FirstName;
             _authenticator.CurrentAccount.LastName = user.LastName;
             _authenticator.CurrentAccount.Email = user.Email;
             _authenticator.CurrentAccount.Password = user.Password;
@@ -96,7 +96,7 @@ namespace WarNotes.View
             Hide();
         }
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        internal static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

@@ -28,7 +28,7 @@ namespace WarNotes.View
             _userService = userService;
             _authenticator = authenticator;
 
-            UserDetailDTO user = new UserDetailDTO();
+            UserDetailDto user = new UserDetailDto();
             this.DataContext = user;
             user.FirstName = _authenticator.CurrentAccount.FirstName;
             user.LastName = _authenticator.CurrentAccount.LastName;

@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.Services
 {
     public class UserService : IUserService
     {
-        protected readonly WarNotesContext _dbContext;
+        protected readonly WarNotesContext? _dbContext;
         protected readonly IUserRepository _userRepository;
         protected readonly IMapper _mapper;
 
@@ -23,7 +23,7 @@ namespace BusinessLogicLayer.Services
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto)
+        public async Task<UserDetailDto> CreateUserAsync(UserDetailDto dto)
         { 
             var user = _mapper.Map<User>(dto);
             user.IsBlocked = false;
@@ -31,16 +31,16 @@ namespace BusinessLogicLayer.Services
             var newUser = await _userRepository.CreateUserAsync(user);
             await _userRepository.SaveChangesAcync();
 
-            return _mapper.Map<UserDetailDTO>(newUser);
+            return _mapper.Map<UserDetailDto>(newUser);
         }
 
-        public UserDetailDTO GetUserByEmail(string email)
+        public UserDetailDto GetUserByEmail(string email)
         {
             var user = _userRepository.GetUserByEmailAsync(email);
-            return _mapper.Map<UserDetailDTO>(user); 
+            return _mapper.Map<UserDetailDto>(user); 
         }
 
-        public void UpdateUser(UserDetailDTO dto)
+        public void UpdateUser(UserDetailDto dto)
         {
             var user = _userRepository.GetUserById(dto.Id);
             _userRepository.UpdateUser(user);
@@ -48,16 +48,16 @@ namespace BusinessLogicLayer.Services
             _userRepository.SaveChangesAcync();
         }
 
-        public List<UserDetailDTO> GetAllUsersList()
+        public List<UserDetailDto> GetAllUsersList()
         {
             var users = _userRepository.GetAllUsersListAsync();
-            return _mapper.Map<List<UserDetailDTO>>(users);
+            return _mapper.Map<List<UserDetailDto>>(users);
         }
 
-        public UserDetailDTO GetUserById(int id)
+        public UserDetailDto GetUserById(int id)
         {
             var user = _userRepository.GetUserById(id);
-            return _mapper.Map<UserDetailDTO>(user);
+            return _mapper.Map<UserDetailDto>(user);
         }
     }
 }

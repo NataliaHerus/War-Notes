@@ -10,9 +10,9 @@ namespace BusinessLogicLayer.Authentication
 {
     public interface IAuthenticator
     {
-        UserDetailDTO CurrentAccount { get; }
+        UserDetailDto? CurrentAccount { get; }
         bool IsLoggedIn { get; }
-        UserDetailDTO Login(string username, string password);
+        UserDetailDto Login(string email, string password);
 
         void Logout();
     }

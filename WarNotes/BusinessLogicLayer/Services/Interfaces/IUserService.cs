@@ -10,10 +10,10 @@ namespace BusinessLogicLayer.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserDetailDTO> CreateUserAsync(UserDetailDTO dto);
-        void UpdateUser(UserDetailDTO dto);
-        UserDetailDTO GetUserByEmail(string email);
-        UserDetailDTO GetUserById(int id);
-        List<UserDetailDTO> GetAllUsersList();
+        Task<UserDetailDto> CreateUserAsync(UserDetailDto dto);
+        void UpdateUser(UserDetailDto dto);
+        UserDetailDto GetUserByEmail(string email);
+        UserDetailDto GetUserById(int id);
+        List<UserDetailDto> GetAllUsersList();
     }
 }

@@ -19,10 +19,10 @@ namespace BusinessLogicLayer.Services
             _categoryrepository = categoryRepository;
         }
 
-        public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
         {
             var categories = await _categoryrepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
 
         public async Task<string> GetCategoryNameById(int id)

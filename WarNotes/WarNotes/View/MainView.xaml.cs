@@ -155,7 +155,7 @@ namespace WarNotes.View
             player.Play();
         }
 
-        private string GetPhotos(string text, ArticleDTO article)
+        private string GetPhotos(string text, ArticleDto article)
         {
             if (text.Contains("photo"))
             {
@@ -212,7 +212,7 @@ namespace WarNotes.View
             var buttonBack = new Button { Content = "Назад", Style = (Style)FindResource("backButton") };
             buttonBack.Click += BackClicked;
 
-            var userId = _authenticator.CurrentAccount.Id;
+            var userId = _authenticator.CurrentAccount!.Id;
             string buttonPath;
 
             if (_articleService.ArticleIsLikedByUserId(userId, SelectedArticleId))
@@ -263,7 +263,7 @@ namespace WarNotes.View
 
         private void LikeClicked(object sender, RoutedEventArgs e)
         {
-            var userId = _authenticator.CurrentAccount.Id;
+            var userId = _authenticator.CurrentAccount!.Id;
 
             if (_articleService.ArticleIsLikedByUserId(userId, SelectedArticleId))
                 _articleService.DeleteLikedArticle(userId, SelectedArticleId);
@@ -276,7 +276,7 @@ namespace WarNotes.View
 
         private void SaveClicked(object sender, RoutedEventArgs e)
         {
-            var userId = _authenticator.CurrentAccount.Id;
+            var userId = _authenticator.CurrentAccount!.Id;
 
             if (_articleService.ArticleIsSavedByUserId(userId, SelectedArticleId))
                 _articleService.DeleteSavedArticle(userId, SelectedArticleId);
@@ -323,7 +323,7 @@ namespace WarNotes.View
         
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            if (_authenticator.CurrentAccount.Role is Role.User)
+            if (_authenticator.CurrentAccount!.Role is Role.User)
             {
                 UserProfile userProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
                 userProfile.Show();

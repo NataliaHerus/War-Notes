@@ -15,9 +15,7 @@ namespace WarNotes.View
         private readonly ICategoryService _categoryService;
         private readonly IArticleService _articleService;
         private readonly IAuthenticator _authenticator;
-        private readonly UserDetailDTO user;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly UserDetailDto user;
 
         public LoginView(
             IUserService userService,
@@ -31,7 +29,7 @@ namespace WarNotes.View
             _articleService = articleService;
             _authenticator = authenticator;
 
-            user = new UserDetailDTO();
+            user = new UserDetailDto();
             this.DataContext = user;
 
         }
@@ -60,7 +58,7 @@ namespace WarNotes.View
 
             try
             {
-                _authenticator.Login(user.Email, hashedPassword);
+                _authenticator.Login(user.Email!, hashedPassword);
             }
             catch (Exception ex)
             {

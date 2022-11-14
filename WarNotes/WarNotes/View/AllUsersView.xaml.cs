@@ -41,7 +41,7 @@ namespace WarNotes.View
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            UserDetailDTO user = (UserDetailDTO)AllUsersList.SelectedValue;
+            UserDetailDto user = (UserDetailDto)AllUsersList.SelectedValue;
             if (user != null)
             {
                 user.IsBlocked = true;
@@ -51,7 +51,7 @@ namespace WarNotes.View
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            UserDetailDTO user = (UserDetailDTO)AllUsersList.SelectedValue;
+            UserDetailDto user = (UserDetailDto)AllUsersList.SelectedValue;
             if (user != null)
             {
                 user.IsBlocked = false;

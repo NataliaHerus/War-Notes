@@ -10,8 +10,8 @@ namespace BusinessLogicLayer.Services.Interfaces
 {
     public interface IAuthenticationService
     {
-        UserDetailDTO Login(string email, string password);
-        UserDetailDTO? CurrentAccount { get; set; }
+        UserDetailDto Login(string email, string password);
+        UserDetailDto? CurrentAccount { get; set; }
         bool IsLoggedIn();
 
         void Logout();

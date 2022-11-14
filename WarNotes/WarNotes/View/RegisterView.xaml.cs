@@ -110,7 +110,7 @@ namespace WarNotes.View
             {
                 Hasher hash = new Hasher(password);
                 string hashedPassword = hash.ComputeHash();
-                UserDetailDTO user = new UserDetailDTO();
+                UserDetailDto user = new UserDetailDto();
 
                 user.FirstName = firstName;
                 user.LastName = lastName;

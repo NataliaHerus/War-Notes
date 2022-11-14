@@ -19,13 +19,13 @@ namespace DataAccessLayer.Repositories
         }
         public async Task<User> CreateUserAsync(User user)
         {
-            await _dbContext.Users.AddAsync(user);
+            await _dbContext.Users!.AddAsync(user);
             return user;
         }
 
         public List<User> GetAllUsersListAsync()
         {
-            return _dbContext.Users.ToList();
+            return _dbContext.Users!.ToList();
         }
 
         public User GetUserByEmailAsync(string email)
