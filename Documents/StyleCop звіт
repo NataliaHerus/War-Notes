@@ -1,0 +1,10 @@
+StyleCop звіт
+Після аналізу коду отримали близько 20-25 зауважень (деякі повторювалися).
+Наприклад:
+•	Possible null reference return.
+•	Naming rule violation
+•	‘New’ expression can be simplified
+•	Rename ‘___’ which hides the field with the same name
+•	Rename class ‘__’ to match pascal case naming rules, consider using ‘__’ 
+•	Rename parameter ‘__’ to ‘__’ to match the interface declaration
+Проаналізували всі зауваження та виправили їх.
