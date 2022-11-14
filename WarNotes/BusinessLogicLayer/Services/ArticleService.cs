@@ -65,8 +65,14 @@ namespace BusinessLogicLayer.Services
 
         public IEnumerable<ArticleDTO> GetLikedArticlesByUserId(int userId)
         {
-            var article = _articleRepository.GetLikedArticlesByUserId(userId);
-            return _mapper.Map<IEnumerable<ArticleDTO>>(article);
+            var likedArticles = _articleRepository.GetLikedArticlesByUserId(userId);
+            return _mapper.Map<IEnumerable<ArticleDTO>>(likedArticles);
+        }
+
+        public IEnumerable<ArticleDTO> GetSavedArticlesByUserId(int userId)
+        {
+            var savedArticles = _articleRepository.GetSavedArticlesByUserId(userId);
+            return _mapper.Map<IEnumerable<ArticleDTO>>(savedArticles);
         }
     }
 }

@@ -95,5 +95,12 @@ namespace DataAccessLayer.Repositories
                 .LikedArticles
                 .Where(a => a.UserId == userId).Select(b => b.Article).ToList();
         }
+
+        public IEnumerable<Article> GetSavedArticlesByUserId(int userId)
+        {
+            return _dbContext
+               .SavedArticles
+               .Where(a => a.UserId == userId).Select(b => b.Article).ToList();
+        }
     }
 }
