@@ -62,5 +62,11 @@ namespace BusinessLogicLayer.Services
         {
             _articleRepository.DeleteSavedArticle(userId, articleId);
         }
+
+        public IEnumerable<ArticleDTO> GetLikedArticlesByUserId(int userId)
+        {
+            var article = _articleRepository.GetLikedArticlesByUserId(userId);
+            return _mapper.Map<IEnumerable<ArticleDTO>>(article);
+        }
     }
 }

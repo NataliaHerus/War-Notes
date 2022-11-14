@@ -22,6 +22,7 @@ namespace WarNotes.View
             _articleService = articleService;
             _userService = userService;
             _authenticator = authenticator;
+            LikedArticlesList.ItemsSource = _articleService.GetLikedArticlesByUserId(_authenticator.CurrentAccount.Id);
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)

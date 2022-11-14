@@ -88,5 +88,12 @@ namespace DataAccessLayer.Repositories
             _dbContext.SavedArticles.Remove(savedArticle);
             _dbContext.SaveChanges();
         }
+
+        public IEnumerable<Article> GetLikedArticlesByUserId(int userId)
+        {
+            return _dbContext
+                .LikedArticles
+                .Where(a => a.UserId == userId).Select(b => b.Article).ToList();
+        }
     }
 }
