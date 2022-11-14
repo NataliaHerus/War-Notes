@@ -89,6 +89,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -133,6 +134,12 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="nLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

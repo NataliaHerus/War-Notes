@@ -10,8 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Web;
 using System.Windows;
 using WarNotes.View;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace WarNotes
 {
@@ -53,6 +56,11 @@ namespace WarNotes
                     services.AddSingleton(mapper);
                     services.AddSingleton<MainView>();
 
+                })
+                .ConfigureLogging(logBuilder =>
+                {
+                    logBuilder.SetMinimumLevel(LogLevel.Information);
+                    logBuilder.AddNLog("nLog.config");
                 })
                 .Build();
         }

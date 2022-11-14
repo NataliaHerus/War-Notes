@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Media;
 using BusinessLogicLayer.DTO;
+using NLog;
+using NLog.Web;
 
 namespace WarNotes.View
 {
