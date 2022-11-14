@@ -27,10 +27,10 @@ namespace BusinessLogicLayer.Services
             return _articleRepository.GetArticleTitleById(id);
         }
 
-        public ArticleDTO GetArticleByTitle(string title, int categoryId)
+        public ArticleDto GetArticleByTitle(string title, int categoryId)
         {
             var article = _articleRepository.GetArticleByTitle(title, categoryId);
-            return _mapper.Map<ArticleDTO>(article);
+            return _mapper.Map<ArticleDto>(article);
         }
 
         public bool ArticleIsLikedByUserId(int userId, int articleId)
@@ -63,16 +63,16 @@ namespace BusinessLogicLayer.Services
             _articleRepository.DeleteSavedArticle(userId, articleId);
         }
 
-        public IEnumerable<ArticleDTO> GetLikedArticlesByUserId(int userId)
+        public IEnumerable<ArticleDto> GetLikedArticlesByUserId(int userId)
         {
             var likedArticles = _articleRepository.GetLikedArticlesByUserId(userId);
-            return _mapper.Map<IEnumerable<ArticleDTO>>(likedArticles);
+            return _mapper.Map<IEnumerable<ArticleDto>>(likedArticles);
         }
 
-        public IEnumerable<ArticleDTO> GetSavedArticlesByUserId(int userId)
+        public IEnumerable<ArticleDto> GetSavedArticlesByUserId(int userId)
         {
             var savedArticles = _articleRepository.GetSavedArticlesByUserId(userId);
-            return _mapper.Map<IEnumerable<ArticleDTO>>(savedArticles);
+            return _mapper.Map<IEnumerable<ArticleDto>>(savedArticles);
         }
 
         public int GetCountOfLikes(int articleId)

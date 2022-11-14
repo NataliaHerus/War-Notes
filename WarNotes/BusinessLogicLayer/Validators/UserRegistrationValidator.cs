@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Validators
 {
-    public class UserRegistrationValidator
+    public static class UserRegistrationValidator
     {
         public static bool IsValidName(string value)
         {

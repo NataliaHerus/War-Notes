@@ -17,7 +17,7 @@ namespace BusinessLogicLayer
 
         public string ComputeHash()
         {
-            string hashed = " ";
+            string hashed = "";
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));

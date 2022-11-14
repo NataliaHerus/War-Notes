@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories.Interfaces
     public interface IUserRepository
     {
         Task<User> CreateUserAsync(User user);
-        User UpdateUser(User dto);
+        User UpdateUser(User user);
         User GetUserByEmailAsync(string email);
         List<User> GetAllUsersListAsync();
         User GetUserById(int id);

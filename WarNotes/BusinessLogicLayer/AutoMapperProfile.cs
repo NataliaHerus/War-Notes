@@ -8,9 +8,9 @@ namespace BusinessLogicLayer
     {
         public AutoMapperProfile()
         {
-            CreateMap<Category, CategoryDTO>().ReverseMap();
-            CreateMap<Article, ArticleDTO>().ReverseMap();
-            CreateMap<User, UserDetailDTO>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Article, ArticleDto>().ReverseMap();
+            CreateMap<User, UserDetailDto>().ReverseMap();
         }
     }
 }

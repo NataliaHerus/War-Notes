@@ -20,15 +20,15 @@ namespace BusinessLogicLayer.Authentication
             _authenticationService = authenticationService;
         }
 
-        public UserDetailDTO CurrentAccount
+        public UserDetailDto CurrentAccount
         {
-            get => _authenticationService.CurrentAccount;
-            set { }
+            get => _authenticationService.CurrentAccount!;
+            set { _authenticationService.CurrentAccount = value!; }
         }
 
         public bool IsLoggedIn => _authenticationService.IsLoggedIn();
 
-        public UserDetailDTO Login(string email, string password)
+        public UserDetailDto Login(string email, string password)
         {
             return _authenticationService.Login(email, password);
         }

@@ -26,11 +26,11 @@ namespace WarNotes.View
             _categoryService = categoryService;
             _articleService = articleService;
 
-            UserDetailDTO user = new UserDetailDTO();
+            UserDetailDto user = new UserDetailDto();
             this.DataContext = user;
             _userService = userService;
             _authenticator = authenticator;
-            user.FirstName = _authenticator.CurrentAccount.FirstName;
+            user.FirstName = _authenticator.CurrentAccount!.FirstName;
             user.LastName = _authenticator.CurrentAccount.LastName;
             user.Email = _authenticator.CurrentAccount.Email;
         }
@@ -52,7 +52,7 @@ namespace WarNotes.View
         }
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

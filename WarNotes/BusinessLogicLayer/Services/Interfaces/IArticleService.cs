@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Services.Interfaces
     public interface IArticleService
     {
         IEnumerable<string> GetArticleHeadersByCategoryName(string categoryName);
-        ArticleDTO GetArticleByTitle(string title, int categoryId);
+        ArticleDto GetArticleByTitle(string title, int categoryId);
         string GetArticleTitleById(int id);
 
         bool ArticleIsLikedByUserId(int userId, int articleId);
@@ -17,8 +17,8 @@ namespace BusinessLogicLayer.Services.Interfaces
 
         void DeleteLikedArticle(int userId, int articleId);
         void DeleteSavedArticle(int userId, int articleId);
-        IEnumerable<ArticleDTO> GetLikedArticlesByUserId(int userId);
-        IEnumerable<ArticleDTO> GetSavedArticlesByUserId(int userId);
+        IEnumerable<ArticleDto> GetLikedArticlesByUserId(int userId);
+        IEnumerable<ArticleDto> GetSavedArticlesByUserId(int userId);
 
         int GetCountOfLikes(int articleId);
         int GetCountOfSaves(int articleId);

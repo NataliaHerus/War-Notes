@@ -19,14 +19,14 @@ namespace BusinessLogicLayer.Services
             _userService = userService;
         }
 
-        public UserDetailDTO? CurrentAccount
+        public UserDetailDto? CurrentAccount
         {
             get; set;
         }
 
-        public UserDetailDTO Login(string email, string password)
+        public UserDetailDto Login(string email, string password)
         {
-            UserDetailDTO storedAccount = _userService.GetUserByEmail(email);
+            UserDetailDto storedAccount = _userService.GetUserByEmail(email);
 
             if (storedAccount == null)
             {
@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Services
 
             Hasher storedHash = new Hasher(password);
             string storedHashedPasssword = storedHash.ComputeHash();
-            Hasher hash = new Hasher(storedAccount.Password);
+            Hasher hash = new Hasher(storedAccount.Password!);
             string hashedPasssword = hash.ComputeHash();
 
             if (storedHashedPasssword != hashedPasssword)

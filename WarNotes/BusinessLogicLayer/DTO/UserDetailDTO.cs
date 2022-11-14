@@ -2,7 +2,7 @@ using BusinessLogicLayer.Enums;
 
 namespace BusinessLogicLayer.DTO
 {
-    public class UserDetailDTO
+    public class UserDetailDto
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
