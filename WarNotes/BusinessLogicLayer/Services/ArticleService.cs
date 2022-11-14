@@ -74,5 +74,15 @@ namespace BusinessLogicLayer.Services
             var savedArticles = _articleRepository.GetSavedArticlesByUserId(userId);
             return _mapper.Map<IEnumerable<ArticleDTO>>(savedArticles);
         }
+
+        public int GetCountOfLikes(int articleId)
+        {
+            return _articleRepository.GetCountOfLikes(articleId);
+        }
+
+        public int GetCountOfSaves(int articleId)
+        {
+            return _articleRepository.GetCountOfSaves(articleId);
+        }
     }
 }

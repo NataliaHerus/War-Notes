@@ -102,5 +102,19 @@ namespace DataAccessLayer.Repositories
                .SavedArticles
                .Where(a => a.UserId == userId).Select(b => b.Article).ToList();
         }
+
+        public int GetCountOfLikes(int articleId)
+        {
+            return _dbContext
+                .LikedArticles
+                .Count(a => a.ArticleId == articleId);
+        }
+
+        public int GetCountOfSaves(int articleId)
+        {
+            return _dbContext
+                .SavedArticles
+                .Count(a => a.ArticleId == articleId);
+        }
     }
 }
