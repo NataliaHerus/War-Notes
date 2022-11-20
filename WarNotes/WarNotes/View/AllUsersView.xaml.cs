@@ -46,7 +46,7 @@ namespace WarNotes.View
             {
                 user.IsBlocked = true;
                 _userService.UpdateUser(user);
-                MessageBox.Show("Користувача заблоковано. Вхід в систему обмежено");
+                MessageBox.Show("Користувача заблоковано. Вхід в систему обмежено", "Помилка");
             }
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace WarNotes.View
             {
                 user.IsBlocked = false;
                 _userService.UpdateUser(user);
-                MessageBox.Show("Користувача розблоковано. Тепер він може увійти в систему");
+                MessageBox.Show("Користувача розблоковано. Тепер він може увійти в систему", "Успіх");
             }
         }
         [DllImport("user32.dll")]

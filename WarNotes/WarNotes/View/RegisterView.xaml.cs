@@ -104,7 +104,7 @@ namespace WarNotes.View
             }
             if (_userService.GetUserByEmail(email) is not null)
             {
-                MessageBox.Show("Користувач з такою адресою вже існує. Будь ласка, замініть на іншу");
+                MessageBox.Show("Користувач з такою адресою вже існує. Будь ласка, замініть на іншу", "Помилка");
             }
             else if (valid)
             {
@@ -117,12 +117,12 @@ namespace WarNotes.View
                 user.Email = email;
                 user.Password = hashedPassword;
                 await _userService.CreateUserAsync(user);
-                MessageBox.Show("Користувача успішно зареєстровано");
+                MessageBox.Show("Користувача успішно зареєстровано", "Успіх");
                 txtName.ToolTip = "";
             }
             else
             {
-                MessageBox.Show("Неможливо зареєструвати користувача, повторіть спробу, зважаючи на підказки");
+                MessageBox.Show("Неможливо зареєструвати користувача, повторіть спробу, зважаючи на підказки", "Помилка");
             }
         }
 
