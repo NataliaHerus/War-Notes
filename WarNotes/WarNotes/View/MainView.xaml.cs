@@ -337,7 +337,13 @@ namespace WarNotes.View
                 Hide();
             }
         }
-        
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateView refresh = new UpdateView(_categoryService, _articleService, _userService, _authenticator);
+
+            refresh.Show();
+            Hide();
+        }
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             LoginView loginView = new (_userService, _categoryService, _articleService, _authenticator);

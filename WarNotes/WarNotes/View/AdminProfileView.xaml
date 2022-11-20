@@ -78,8 +78,12 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="24,0,0,0"
-                             Background="Transparent">
+                             Padding="24,0,0,0">
+                        <TextBox.Background>
+                        <ImageBrush ImageSource="/Images/user.png"                                 
+                                        Stretch="Uniform"
+                                        AlignmentX="Left"/>
+                        </TextBox.Background>
                     </TextBox>
                     <TextBlock Text="Прізвище"
                                Foreground="Black"
@@ -100,8 +104,12 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="24,0,0,0"
-                             Background="Transparent">
+                             Padding="24,0,0,0">
+                        <TextBox.Background>
+                        <ImageBrush ImageSource="/Images/user.png"                                 
+                                        Stretch="Uniform"
+                                        AlignmentX="Left"/>
+                        </TextBox.Background>
                     </TextBox>
                     <TextBlock Text="E-mail"
                                Foreground="Black"
@@ -122,11 +130,15 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="24,0,0,0"
-                             Background="Transparent">
+                             Padding="24,0,0,0">
+                        <TextBox.Background>
+                        <ImageBrush ImageSource="/Images/dog.png"                                 
+                                        Stretch="Uniform"
+                                        AlignmentX="Left"/>
+                        </TextBox.Background>
                     </TextBox>
                 </StackPanel>
-                <Button x:Name="showUsers"                          
+                <Button x:Name="btnShowUsers"                          
                             BorderThickness="0"
                             Content="Переглянути список користувачів"
                             Foreground="Black"
@@ -134,8 +146,8 @@
                             FontWeight="Bold"
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
-                            Margin="473,472,472,160"
-                            Click="showUsers_Click">
+                            Margin="473,500,472,120"
+                            Click="btnShowUsers_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="CornflowerBlue"/>
@@ -157,7 +169,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="exit"                          
+                <Button x:Name="btnExit"                          
                             BorderThickness="0"
                             Content="Назад"
                             Foreground="Black"
@@ -166,7 +178,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
                             Margin="0,500,0,0"
-                            Click="exit_Click" Width="150" Height="50">
+                            Click="btnExit_Click" Width="150" Height="50">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Aqua"/>

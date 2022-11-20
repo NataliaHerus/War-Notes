@@ -34,7 +34,7 @@ namespace WarNotes.View
             user.LastName = _authenticator.CurrentAccount.LastName;
             user.Email = _authenticator.CurrentAccount.Email;
         }
-        private void exit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
 
             MainView exitView = new MainView(_categoryService, _articleService, _userService, _authenticator);
@@ -43,21 +43,21 @@ namespace WarNotes.View
             Hide();
         }
 
-        private void openLiked_Click(object sender, RoutedEventArgs e)
+        private void btnOpenLiked_Click(object sender, RoutedEventArgs e)
         {
             LikedArticlesView open = new LikedArticlesView(_categoryService, _articleService, _userService, _authenticator);
 
             open.Show();
             Hide();
         }
-        private void openSaved_Click(object sender, RoutedEventArgs e)
+        private void btnOpenSaved_Click(object sender, RoutedEventArgs e)
         {
             SavedArticlesView open = new SavedArticlesView(_categoryService, _articleService, _userService, _authenticator);
 
             open.Show();
             Hide();
         }
-        private void update_Click(object sender, RoutedEventArgs e)
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             UpdateView refresh = new UpdateView(_categoryService, _articleService, _userService, _authenticator);
 

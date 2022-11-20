@@ -130,7 +130,7 @@
                                TextWrapping="Wrap"
                                TextAlignment="Center"
                                Margin="0,5,0,0"/>
-                    <TextBlock Text="E-mail"
+                    <TextBlock Text="E-mail:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
@@ -155,7 +155,7 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <TextBlock Text="Пароль"
+                    <TextBlock Text="Пароль:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"

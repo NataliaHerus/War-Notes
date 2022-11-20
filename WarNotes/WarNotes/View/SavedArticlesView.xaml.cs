@@ -29,7 +29,7 @@ namespace WarNotes.View
             SavedArticlesList.ItemsSource = _articleService.GetSavedArticlesByUserId(_authenticator.CurrentAccount!.Id);
         }
 
-        private void exit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             UserProfile backToProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
 
@@ -66,5 +66,7 @@ namespace WarNotes.View
                 this.WindowState = WindowState.Maximized;
             else this.WindowState = WindowState.Normal;
         }
+
+      
     }
 }

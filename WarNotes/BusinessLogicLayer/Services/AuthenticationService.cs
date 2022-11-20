@@ -30,11 +30,11 @@ namespace BusinessLogicLayer.Services
 
             if (storedAccount == null)
             {
-                throw new UserNotFoundException("Користувача з вказаною поштою не існує", email);
+                throw new UserNotFoundException("Користувача з вказаною поштою не існує.", email);
             }
             if (storedAccount.IsBlocked)
             {
-                throw new UserNotFoundException("Користувач заблокований", email);
+                throw new UserNotFoundException("Користувач заблокований.", email);
             }
 
             Hasher storedHash = new Hasher(password);
@@ -44,7 +44,7 @@ namespace BusinessLogicLayer.Services
 
             if (storedHashedPasssword != hashedPasssword)
             {
-                throw new InvalidPasswordException("Неправильний пароль", email, password);
+                throw new InvalidPasswordException("Неправильний пароль.", email, password);
             }
 
             CurrentAccount = storedAccount;

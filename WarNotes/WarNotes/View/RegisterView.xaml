@@ -120,7 +120,7 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="Ім'я"
+                    <TextBlock Text="Ім'я:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
@@ -144,7 +144,7 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <TextBlock Text="Прізвище"
+                    <TextBlock Text="Прізвище:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
@@ -168,7 +168,7 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <TextBlock Text="E-mail"
+                    <TextBlock Text="E-mail:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
@@ -192,7 +192,7 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <TextBlock Text="Пароль"
+                    <TextBlock Text="Пароль:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
@@ -216,7 +216,7 @@
                                         AlignmentX="Left"/>
                         </PasswordBox.Background>
                     </PasswordBox>
-                    <TextBlock Text="Повторіть пароль"
+                    <TextBlock Text="Повторіть пароль:"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"

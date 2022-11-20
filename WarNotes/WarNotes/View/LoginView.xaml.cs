@@ -79,5 +79,7 @@ namespace WarNotes.View
             registerView.Show();
             Hide();
         }
+
+       
     }
 }

@@ -29,7 +29,7 @@ namespace WarNotes.View
             LikedArticlesList.ItemsSource = _articleService.GetLikedArticlesByUserId(_authenticator.CurrentAccount!.Id);
         }
 
-        private void exit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             UserProfile backToProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
 
