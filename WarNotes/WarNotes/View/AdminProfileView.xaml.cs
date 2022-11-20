@@ -35,7 +35,7 @@ namespace WarNotes.View
             user.Email = _authenticator.CurrentAccount.Email;
         }
 
-        private void showUsers_Click(object sender, RoutedEventArgs e)
+        private void btnShowUsers_Click(object sender, RoutedEventArgs e)
         {
             AllUsersView openUsers = new AllUsersView(_categoryService, _articleService, _userService, _authenticator);
 
@@ -43,7 +43,7 @@ namespace WarNotes.View
             Hide();
         }
 
-        private void exit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             MainView exitView = new MainView(_categoryService, _articleService, _userService, _authenticator);
 
@@ -81,5 +81,7 @@ namespace WarNotes.View
                 this.WindowState = WindowState.Maximized;
             else this.WindowState = WindowState.Normal;
         }
+
+      
     }
 }

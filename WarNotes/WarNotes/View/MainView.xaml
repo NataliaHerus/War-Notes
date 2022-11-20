@@ -113,12 +113,23 @@
                                 Margin="0,0,8,0"
                                 MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
                                 MouseEnter="pnlControlBar_MouseEnter">
-                        <Button x:Name="btnUser"                           
+                        <Button x:Name="btnUser"
+                                
                             BorderThickness="0"
                             FontFamily="Montserrat"
                             Cursor="Hand"
-                            Grid.Column="1"
-                            Click="btnUser_Click">
+                            Grid.Column="1" Click="btnUser_Click">
+                            <Button.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Переглянути профіль" 
+                                               Click="btnUser_Click"/>
+                                    <MenuItem Header="Редагувати профіль"
+                                              Click="btnUpdate_Click"/>
+                                    <Separator />
+                                    <MenuItem Header="Вийти"
+                                              Click="btnBack_Click"/>
+                                </ContextMenu>
+                            </Button.ContextMenu>
                             <Image Source="/Images/user.png" Height="23" Width="23"/>
                             <Button.Style>
                                 <Style TargetType="Button">

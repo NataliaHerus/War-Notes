@@ -31,7 +31,7 @@ namespace WarNotes.View
             AllUsersList.ItemsSource = _userService.GetAllUsersList();
         }
 
-        private void exit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             AdminProfileView exit = new AdminProfileView(_categoryService, _articleService, _userService, _authenticator);
 

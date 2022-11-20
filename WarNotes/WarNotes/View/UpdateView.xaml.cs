@@ -42,7 +42,7 @@ namespace WarNotes.View
             this.DataContext = user;
         }
 
-        private void saveChanges_Click(object sender, RoutedEventArgs e)
+        private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
 
             if (txtPass2.Password == "" || txtPass.Password == "")
@@ -88,12 +88,17 @@ namespace WarNotes.View
             _authenticator.CurrentAccount.Password = user.Password;
         }
 
-        private void exit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            UserProfile backToProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
+            MainView exitView = new MainView(_categoryService, _articleService, _userService, _authenticator);
+
+            exitView.Show();
+            Hide();
+
+            /*UserProfile backToProfile = new UserProfile(_categoryService, _articleService, _userService, _authenticator);
 
             backToProfile.Show();
-            Hide();
+            Hide();*/
         }
         [DllImport("user32.dll")]
         internal static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);

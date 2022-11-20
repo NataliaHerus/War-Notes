@@ -50,30 +50,32 @@
                     </StackPanel>
                 </Grid>
                 <TextBlock Text="Вподобані статті"
-                               Margin="491,51,0,594"
+                               Margin="0,50,0,0"
                                Foreground="Black"
                                FontSize="40"
                                FontWeight="Medium"
                                FontFamily="Montserrat"
-                               HorizontalAlignment="Left"/>
+                               HorizontalAlignment="Center"/>
                 <ListBox x:Name="LikedArticlesList" 
+                         
                          Height="450"
+                         Width="1200"
                          ScrollViewer.CanContentScroll="True"
                          ScrollViewer.VerticalScrollBarVisibility="Visible"
                          HorizontalContentAlignment="Center" 
                          Background="#FFC89EE3" 
-                         Width="770" 
+                         
                          BorderBrush="#FF020611"
                          HorizontalAlignment="Center">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="700" />
+                                    <ColumnDefinition Width="1100" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Title}" 
                                            FontWeight="Medium"
-                                           FontSize="25"
+                                           FontSize="35"
                                            HorizontalAlignment ="Left"
                                            VerticalAlignment="Center" 
                                            />
@@ -81,16 +83,16 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button x:Name="exit"                          
+                <Button x:Name="btnExit"                          
                             BorderThickness="0"
-                            Content="Вийти"
+                            Content="Назад"
                             Foreground="Black"
                             FontSize="15"
                             FontWeight="Bold"
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
                             Margin="0,550,0,0"
-                            Click="exit_Click" Width="150" Height="50">
+                            Click="btnExit_Click" Width="150" Height="50">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Aqua"/>
